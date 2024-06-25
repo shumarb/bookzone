@@ -13,24 +13,24 @@ BookZone is a platform serving librarians at the Singapore Book Collectors club 
 
 ## Setup
 1. Ensure your local machine is configured with `Git, Java, Eclipse IDE, MySQL, and MySQL Workbench`.
-2. Download the [zip file](https://github.com/shumarb/bookzone/bookZone.zip) of the project ot your local machine.
-3. Unzip the zip file. You will see a folder called `bookZone`.
+2. Download the [zip file](https://github.com/shumarb/bookzone/bookzone.zip) of the project ot your local machine.
+3. Unzip the zip file. You will see a folder called `bookzone`.
 4. Open the `Eclipse IDE`.
 5. Select `File`.
 6. Select `Import`.
 7. Select `Maven`
 8. Select `Existing Maven Project`.
 9. At `Root Directory`, select `Browse`.
-10. Navigate to the folder of the unzipped `bookZone` project.
-11. Select the folder in Step 9. You will see the `bookZone` project in the Package Explorer.
+10. Navigate to the folder of the unzipped `bookzone` project.
+11. Select the folder in Step 9. You will see the `bookzone` project in the Package Explorer.
 12. Change lines 6 & 7 of application.properties to the `username` and `password` of your `MySQL database`.
 13. Create a `schema` in your `MySQL Workbench` called book_zone.
 
 ## Instructions
-1. Select the `>` icon of the `bookZone` project.
+1. Select the `>` icon of the `bookzone` project.
 2. Select the `>` icon of the `src/main/java/` folder.
 3. Select the `>` icon of the `com.bookzone` package.
-4. Right-click `BookZoneApplication.java`.
+4. Right-click `BookzoneApplication.java`.
 5. Select `Run As`.
 6. Select `1. Java Application`.
 7. Open a web browser.
