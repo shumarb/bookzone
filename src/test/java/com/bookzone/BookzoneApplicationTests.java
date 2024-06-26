@@ -1,4 +1,4 @@
-package com.example.bookzone;
+package com.bookzone;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
