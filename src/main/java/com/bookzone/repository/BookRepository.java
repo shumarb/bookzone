@@ -1,6 +1,6 @@
 /**
  * The BookRepository interface that extends from the JpaRepository.
- * It is used to manage the Book enitity.
+ * It is used to manage the Book entity.
  */
 
 package com.bookzone.repository;
@@ -16,9 +16,9 @@ import com.bookzone.model.Book;
 public interface BookRepository extends JpaRepository<Book, Long> {
 	
 	/**
-	 * Finds a book based on it's id.
+	 * Finds a book by id.
 	 * 
-	 * @param the id of the book to retrieve
+	 * @param id of the book to retrieve
 	 * @return an Optional of type Book that has the given ID,
 	 * or empty if no Book with the given id exists.
 	 */
