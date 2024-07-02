@@ -45,7 +45,7 @@
 		<table class="table table-striped table-hover">
 		  <thead>
 		    <tr>
-		      <th scope="col">Id</th>
+		      <th scope="col">#</th>
 		      <th scope="col">Title</th>
 		      <th scope="col">Author</th>
 		      <th scope="col">Category</th>
@@ -54,8 +54,8 @@
 		    </tr>
 		  </thead>
 		  <tbody>
-		    <tr th:each="b :${book}">
-		      <td th:text="${b.id}"></td>
+		    <tr th:each="b, iterStat :${book}">
+		      <td th:text="${iterStat.index + 1}"></td>
 		      <td th:text="${b.title}"></td>
 		      <td th:text="${b.author}"></td>
 		      <td th:text="${b.category}"></td>
