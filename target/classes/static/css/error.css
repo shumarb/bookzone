@@ -1,0 +1,21 @@
+body {
+	background-color: lightgrey;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	margin: 0;
+}
+
+.container {
+	text-align: center;
+}
+
+.container h2 {
+	margin-bottom: 20px;
+}
+
+.container a {
+	display: block;
+	margin-bottom: 10px;
+}
