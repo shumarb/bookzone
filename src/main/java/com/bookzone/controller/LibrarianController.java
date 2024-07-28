@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bookzone.model.Librarian;
 import com.bookzone.service.LibrarianService;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class LibrarianController {
@@ -94,10 +95,10 @@ public class LibrarianController {
 	 * @return name of the Registration page
 	 */
 	
-	@GetMapping("/register")
+	@GetMapping("/registration")
 	public String goToRegistration() {
 		librarianControllerLogger.info("LibrarianControllerLogger: Currently at Registration page");
-		return "register";
+		return "registration";
 	}
 	
 	/**
@@ -109,15 +110,17 @@ public class LibrarianController {
 	 * @return Redirection to the Login page for a successful registration, or back to the Registraion page
 	 * with an error message displaying the reason(s) for unsuccessful registration
 	 */
-	@PostMapping("/register")
+	@PostMapping("/registration")
 	public String registerLibrarian(@RequestParam String name,
 									@RequestParam String email,
 									@RequestParam String password,
-									Model model) {
+									Model model,
+									RedirectAttributes redirectAttributes) {
 		if (this.librarianService.isValidName(name) && this.librarianService.isValidEmailAddress(email) && this.librarianService.isValidPassword(password)) {
 	    	this.librarianService.registerLibrarian(new Librarian(name, email, password));
 	        librarianControllerLogger.info("LibrarianControllerLogger: Librarian successfully registered, proceeding to Login page");
-	        return "redirect:/login";
+			redirectAttributes.addFlashAttribute("successfulRegistration", "Registration successful. Please log in.");
+			return "redirect:/login";
 	    
 		} else {
 	    	if (!this.librarianService.isValidName(name)) {
@@ -132,7 +135,7 @@ public class LibrarianController {
 	    		librarianControllerLogger.error("LibrarianControllerLogger: Unsuccessful registration due to invalid password, proceeding to Registration page");
 		    	model.addAttribute("error", "Unsuccessful registration due to invalid password");
 	    	}
-	    	return "register";
+	    	return "registration";
 	    }
 	}
 
