@@ -40,10 +40,8 @@ public class LibrarianController {
 	 */
 	@GetMapping("/")
 	public String goToIndex() {
-		
 		librarianControllerLogger.info("LibrarianControllerLogger: Currently at Index page");
 		return "index";
-		
 	}
 	
 	/**
@@ -53,10 +51,8 @@ public class LibrarianController {
 	 */
 	@GetMapping("/home")
 	public String goToHome() {
-		
 		librarianControllerLogger.info("LibrarianControllerLogger: Currently at Home page");
 		return "home";
-		
 	}
 	
 	/**
@@ -66,10 +62,8 @@ public class LibrarianController {
 	 */
 	@GetMapping("/login")
 	public String goToLogin() {
-		
 		librarianControllerLogger.info("LibrarianControllerLogger: Currently at Login page");
 		return "login";
-		
 	}
 	
 	/**
@@ -78,12 +72,11 @@ public class LibrarianController {
 	 * @param email: email address of the Librarian
 	 * @param password: password of the Librarian
 	 * @param model: The model where attributes can be added for the view
-	 * @return: Redirection to the Home page for a successful login, or back to the login page 
+	 * @return Redirection to the Home page for a successful login, or back to the login page
 	 * with an error message displayed for unsuccessful login
 	 */
 	@PostMapping("/login")
 	public String loginLibrarian(@RequestParam String email, @RequestParam String password, Model model) {
-		
 	    boolean doesLibrarianExist = this.librarianService.loginLibrarian(email, password);
 	    if (doesLibrarianExist) {
 	        librarianControllerLogger.info("LibrarianControllerLogger: Librarian successfully logged in, proceeding to Home page");
@@ -93,7 +86,6 @@ public class LibrarianController {
 	        model.addAttribute("error", "Invalid email or password. Please try again.");
 	        return "login";
 	    }
-	    
 	}
 	
 	/**
@@ -104,10 +96,8 @@ public class LibrarianController {
 	
 	@GetMapping("/register")
 	public String goToRegistration() {
-		
 		librarianControllerLogger.info("LibrarianControllerLogger: Currently at Registration page");
 		return "register";
-	
 	}
 	
 	/**
@@ -116,37 +106,32 @@ public class LibrarianController {
 	 * @param email: email address of the Librarian
 	 * @param password: password of the Librarian
 	 * @param model: The model where attributes can be added for the view
-	 * @return: Redirection to the Login page for a successful registration, or back to the Registraion page 
+	 * @return Redirection to the Login page for a successful registration, or back to the Registraion page
 	 * with an error message displaying the reason(s) for unsuccessful registration
 	 */
 	@PostMapping("/register")
-	public String registerLibrarian(@RequestParam String name, @RequestParam String email, @RequestParam String password, Model model) {
-		
+	public String registerLibrarian(@RequestParam String name,
+									@RequestParam String email,
+									@RequestParam String password,
+									Model model) {
 		if (this.librarianService.isValidName(name) && this.librarianService.isValidEmailAddress(email) && this.librarianService.isValidPassword(password)) {
-			
 	    	this.librarianService.registerLibrarian(new Librarian(name, email, password));
 	        librarianControllerLogger.info("LibrarianControllerLogger: Librarian successfully registered, proceeding to Login page");
 	        return "redirect:/login";
 	    
 		} else {
-	    	
 	    	if (!this.librarianService.isValidName(name)) {
-	    		
 	    		librarianControllerLogger.error("LibrarianControllerLogger: Unsuccessful registration due to invalid name, proceeding to Registration page");
 		    	model.addAttribute("error", "Unsuccessful registration due to invalid name");
 	    	
 	    	} else if (!this.librarianService.isValidEmailAddress(email)) {
-	    		
 	    		librarianControllerLogger.error("LibrarianControllerLogger: Unsuccessful registration due to invalid email address, proceeding to Registration page");
 		    	model.addAttribute("error", "Unsuccessful registration due to invalid email address");
 	    	
 	    	} else if (!this.librarianService.isValidPassword(password)) {
-	    		
 	    		librarianControllerLogger.error("LibrarianControllerLogger: Unsuccessful registration due to invalid password, proceeding to Registration page");
 		    	model.addAttribute("error", "Unsuccessful registration due to invalid password");
-	    	
-	    	} 
-	    	
+	    	}
 	    	return "register";
 	    }
 	}
@@ -158,10 +143,8 @@ public class LibrarianController {
 	 */
 	@GetMapping("/logout")
 	public String logoutLibrarian() {
-		
 		librarianControllerLogger.info("LibrarianControllerLogger: Librarian logged out, proceeding to Index page");
 		return "redirect:/";
-	
 	}
 	
 }

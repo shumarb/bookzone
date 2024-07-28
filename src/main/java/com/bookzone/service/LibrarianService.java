@@ -39,8 +39,8 @@ public class LibrarianService {
 	 * Register a librarian by checking if the librarian's account exists in the BookZone database
 	 * If not, save the name, email address, and password that the Librarian has enteered into the MySQL database
 	 * 
-	 * @params: Librarian object, which comprises of the name, email, and password the Librarian has entered at the Registration page
-	 * @return: True if librarian's account exists, false otherwise
+	 * @param: Librarian object, which comprises of the name, email, and password the Librarian has entered at the Registration page
+	 * @retur: True if librarian's account exists, false otherwise
 	 */
 	public void registerLibrarian(Librarian librarian) {
 		librarianServiceLogger.info("LibrarianServiceLogger: Email address provided is available");
@@ -83,7 +83,7 @@ public class LibrarianService {
 	 * @return: True if password has at least 8 characters, false otherwise
 	 */
 	public boolean hasAtLeastEightCharacters(String password) {
-		return password.length() > 8;
+		return password.length() >= 8;
 	}
 	
 	/**
@@ -167,12 +167,12 @@ public class LibrarianService {
 	    	}
 	    }
 	    
-	    if (numberOfUpperCaseLetters > 3 && numberOfLowerCaseLetters > 3 && numberOfNumbers > 2) {
+	    if (numberOfUpperCaseLetters >= 3 && numberOfLowerCaseLetters >= 3 && numberOfNumbers >= 2) {
 	    	librarianServiceLogger.info("LibrarianServiceLogger: Valid password: Password has at least 8 characters and contains at least 3 are uppercase letters, at least 3 lowercase letters, and at least 2 numbers");
 	    } else {
 	    	librarianServiceLogger.info("LibrarianServiceLogger: Invalid password: Password has at least 8 characters and at least one of these situations: less than 3 uppercase letters, less than 3 lowercase letters, and less than 2 numbers");     	
 	    }
-	    return numberOfUpperCaseLetters > 3 && numberOfLowerCaseLetters > 3 && numberOfNumbers > 2;
+	    return numberOfUpperCaseLetters >= 3 && numberOfLowerCaseLetters >= 3 && numberOfNumbers >= 2;
 	}
 	
 	/**
