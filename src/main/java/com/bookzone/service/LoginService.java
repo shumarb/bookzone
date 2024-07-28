@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-
 @Service
 public class LoginService {
 
@@ -58,4 +57,5 @@ public class LoginService {
         }
         return false;
     }
+
 }

@@ -3,12 +3,9 @@ package com.bookzone.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-import com.bookzone.model.Person;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-
-import com.bookzone.model.Librarian;
 
 class LibrarianTest {
 
