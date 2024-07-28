@@ -4,8 +4,6 @@
 
 package com.bookzone.controller;
 
-import com.bookzone.model.Person;
-import com.bookzone.repository.PersonRepository;
 import com.bookzone.service.LoginService;
 import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
