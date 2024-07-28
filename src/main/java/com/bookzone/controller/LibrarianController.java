@@ -16,9 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.bookzone.model.Librarian;
-import com.bookzone.service.LibrarianService;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import com.bookzone.service.RegistrationService;
 
 @Controller
 public class LibrarianController {
@@ -29,10 +27,10 @@ public class LibrarianController {
 	private static final Logger librarianControllerLogger = LogManager.getLogger(LibrarianController.class);
 	
 	/**
-	 * LibrarianService to manage the Librarians
+	 * RegistrationService to manage the Librarians
 	 */
 	@Autowired
-	private LibrarianService librarianService;
+	private RegistrationService registrationService;
 	
 	/**
 	 * Goes to the Index page
@@ -78,7 +76,7 @@ public class LibrarianController {
 	 */
 	@PostMapping("/login")
 	public String loginLibrarian(@RequestParam String email, @RequestParam String password, Model model) {
-	    boolean doesLibrarianExist = this.librarianService.loginLibrarian(email, password);
+	    boolean doesLibrarianExist = this.registrationService.loginLibrarian(email, password);
 	    if (doesLibrarianExist) {
 	        librarianControllerLogger.info("LibrarianControllerLogger: Librarian successfully logged in, proceeding to Home page");
 	        return "redirect:/home";
@@ -86,56 +84,6 @@ public class LibrarianController {
 	        librarianControllerLogger.error("LibrarianControllerLogger: Librarian unsuccessful in logging in, proceeding to Login page");
 	        model.addAttribute("error", "Invalid email or password. Please try again.");
 	        return "login";
-	    }
-	}
-	
-	/**
-	 * Goes to the Registration page
-	 * 
-	 * @return name of the Registration page
-	 */
-	
-	@GetMapping("/registration")
-	public String goToRegistration() {
-		librarianControllerLogger.info("LibrarianControllerLogger: Currently at Registration page");
-		return "registration";
-	}
-	
-	/**
-	 * Manages the Librarian's registration
-	 * 
-	 * @param email: email address of the Librarian
-	 * @param password: password of the Librarian
-	 * @param model: The model where attributes can be added for the view
-	 * @return Redirection to the Login page for a successful registration, or back to the Registraion page
-	 * with an error message displaying the reason(s) for unsuccessful registration
-	 */
-	@PostMapping("/registration")
-	public String registerLibrarian(@RequestParam String name,
-									@RequestParam String email,
-									@RequestParam String password,
-									Model model,
-									RedirectAttributes redirectAttributes) {
-		if (this.librarianService.isValidName(name) && this.librarianService.isValidEmailAddress(email) && this.librarianService.isValidPassword(password)) {
-	    	this.librarianService.registerLibrarian(new Librarian(name, email, password));
-	        librarianControllerLogger.info("LibrarianControllerLogger: Librarian successfully registered, proceeding to Login page");
-			redirectAttributes.addFlashAttribute("successfulRegistration", "Registration successful. Please log in.");
-			return "redirect:/login";
-	    
-		} else {
-	    	if (!this.librarianService.isValidName(name)) {
-	    		librarianControllerLogger.error("LibrarianControllerLogger: Unsuccessful registration due to invalid name, proceeding to Registration page");
-		    	model.addAttribute("error", "Unsuccessful registration due to invalid name");
-	    	
-	    	} else if (!this.librarianService.isValidEmailAddress(email)) {
-	    		librarianControllerLogger.error("LibrarianControllerLogger: Unsuccessful registration due to invalid email address, proceeding to Registration page");
-		    	model.addAttribute("error", "Unsuccessful registration due to invalid email address");
-	    	
-	    	} else if (!this.librarianService.isValidPassword(password)) {
-	    		librarianControllerLogger.error("LibrarianControllerLogger: Unsuccessful registration due to invalid password, proceeding to Registration page");
-		    	model.addAttribute("error", "Unsuccessful registration due to invalid password");
-	    	}
-	    	return "registration";
 	    }
 	}
 

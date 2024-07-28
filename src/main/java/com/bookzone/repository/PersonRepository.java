@@ -1,6 +1,5 @@
 /**
- * The LibrarianRepository is a repository that extends from the JpaRepository.
- * It is used to manage the Librarian entity.
+ * Repository interface for managing {@link Person} entities.
  */
 
 package com.bookzone.repository;
@@ -13,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.bookzone.model.Librarian;
 
 @Repository
-public interface LibrarianRepository extends JpaRepository<Librarian, Long> {
+public interface PersonRepository extends JpaRepository<Librarian, Long> {
 	
 	/**
 	 * Retrieves a Librarian based on email

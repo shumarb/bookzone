@@ -1,5 +1,5 @@
 /**
- * LibrarianService.java manages the Librarian object.
+ * RegistrationService.java manages the Librarian object.
  * 
  * There are 2 operations involved to manage a Librarian object:
  * 
@@ -16,24 +16,24 @@ package com.bookzone.service;
 
 import java.util.Optional;
 
+import com.bookzone.repository.PersonRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bookzone.model.Librarian;
-import com.bookzone.repository.LibrarianRepository;
 
 @Service
-public class LibrarianService {
+public class RegistrationService {
 
 	/**
-	 * Logger for LibrarianService
+	 * Logger for RegistrationService
 	 */
-	private static final Logger librarianServiceLogger = LogManager.getLogger(LibrarianService.class);
+	private static final Logger librarianServiceLogger = LogManager.getLogger(RegistrationService.class);
 	
 	@Autowired
-	private LibrarianRepository librarianRepository;
+	private PersonRepository personRepository;
 	
 	/**
 	 * Register a librarian by checking if the librarian's account exists in the BookZone database
@@ -44,7 +44,7 @@ public class LibrarianService {
 	 */
 	public void registerLibrarian(Librarian librarian) {
 		librarianServiceLogger.info("LibrarianServiceLogger: Email address provided is available");
-		this.librarianRepository.save(librarian);
+		this.personRepository.save(librarian);
 	}
 	
 	/**
@@ -54,7 +54,7 @@ public class LibrarianService {
 	 * @return True if email address exists in database, false otherwise
 	 */
 	public boolean isValidEmailAddress(String email) {
-		Optional<Librarian> librarianOptional = this.librarianRepository.findByEmail(email);
+		Optional<Librarian> librarianOptional = this.personRepository.findByEmail(email);
 		
 		// 1. Check if email address provided exists
 		if (librarianOptional.isPresent()) {
@@ -196,7 +196,7 @@ public class LibrarianService {
 	 * @result: True if librarian enters valid email address and password, false otherwise
 	 */
 	public boolean loginLibrarian(String email, String password) {
-		Optional<Librarian> librarianOptional = this.librarianRepository.findByEmail(email);
+		Optional<Librarian> librarianOptional = this.personRepository.findByEmail(email);
 		if (librarianOptional.isPresent()) {
 			Librarian librarian = librarianOptional.get();
 			if (librarian.getPassword().equals(password)) {

@@ -6,6 +6,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.Optional;
 
+import com.bookzone.service.RegistrationService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -13,59 +14,58 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.bookzone.model.Librarian;
-import com.bookzone.repository.LibrarianRepository;
-import com.bookzone.service.LibrarianService;
+import com.bookzone.repository.PersonRepository;
 
 @ExtendWith(MockitoExtension.class)
-class LibrarianServiceTest {
+class RegistrationServiceTest {
 
     @Mock
-    private LibrarianRepository librarianRepository;
+    private PersonRepository personRepository;
 
     @InjectMocks
-    private LibrarianService librarianService;
+    private RegistrationService registrationService;
 
     @Test
     void testIsValidEmailAddress_validExistingEmail() {
         String email = "john.tan@sgbookcollectors.com";
-        when(librarianRepository.findByEmail(email)).thenReturn(Optional.of(new Librarian()));
-        boolean result = librarianService.isValidEmailAddress(email);
+        when(personRepository.findByEmail(email)).thenReturn(Optional.of(new Librarian()));
+        boolean result = registrationService.isValidEmailAddress(email);
         assertFalse(result);
     }
 
     @Test
     void testIsValidEmailAddress_validNewEmail() {
         String email = "john.wayne@sgbookcollectors.com";
-        when(librarianRepository.findByEmail(email)).thenReturn(Optional.empty());
-        boolean result = librarianService.isValidEmailAddress(email);
+        when(personRepository.findByEmail(email)).thenReturn(Optional.empty());
+        boolean result = registrationService.isValidEmailAddress(email);
         assertTrue(result);
     }
 
     @Test
     void testIsValidPassword_validPassword() {
         String password = "SSSSSSSnnnnn981231";
-        boolean result = librarianService.isValidPassword(password);
+        boolean result = registrationService.isValidPassword(password);
         assertTrue(result);
     }
 
     @Test
     void testIsValidPassword_invalidPassword_insufficientUpperCaseLetters() {
         String password = "WWmmm11";
-        boolean result = librarianService.isValidPassword(password);
+        boolean result = registrationService.isValidPassword(password);
         assertFalse(result);
     }
 
     @Test
     void testIsValidName_validName() {
         String name = "John Doe";
-        boolean result = librarianService.isValidName(name);
+        boolean result = registrationService.isValidName(name);
         assertTrue(result);
     }
 
     @Test
     void testIsValidName_InvalidName() {
         String name = "John";
-        boolean result = librarianService.isValidName(name);
+        boolean result = registrationService.isValidName(name);
         assertFalse(result);
     }
 
@@ -75,9 +75,9 @@ class LibrarianServiceTest {
         String password = "PPPlll333";
         Librarian librarian = new Librarian();
         librarian.setPassword("StrongPassword");
-        when(librarianRepository.findByEmail(email)).thenReturn(Optional.of(librarian));
+        when(personRepository.findByEmail(email)).thenReturn(Optional.of(librarian));
 
-        boolean result = librarianService.loginLibrarian(email, password);
+        boolean result = registrationService.loginLibrarian(email, password);
         assertFalse(result);
     }
 
