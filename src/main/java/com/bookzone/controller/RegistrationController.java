@@ -22,13 +22,22 @@ public class RegistrationController {
     /**
      * Logger used for logging messages of the LibrarianController
      */
-    private static final Logger registrationControllerLogger = LogManager.getLogger(LibrarianController.class);
+    private static final Logger registrationControllerLogger = LogManager.getLogger(HomeController.class);
 
     /**
-     * RegistrationService to manage the Librarians
+     * Service to handle registration operations for {@link Person} entities.
      */
     @Autowired
     private RegistrationService registrationService;
+
+    /**
+     * Constructs a {@code RegistrationController} with the specified {@code RegistrationService}.
+     *
+     * @param registrationService The service used to manage registrations.
+     */
+    public RegistrationController(RegistrationService registrationService) {
+        this.registrationService = registrationService;
+    }
 
     /**
      * Handles the GET request for the Registration page.
