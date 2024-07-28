@@ -48,3 +48,9 @@ body {
 	font-weight: bold;
 	margin-top: 10px;
 }
+
+.successful-registration-message {
+	color: green;
+	font-weight: bold;
+	margin-top: 10px;
+}

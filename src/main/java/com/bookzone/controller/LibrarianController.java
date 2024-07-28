@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bookzone.model.Librarian;
 import com.bookzone.service.LibrarianService;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class LibrarianController {
@@ -113,11 +114,13 @@ public class LibrarianController {
 	public String registerLibrarian(@RequestParam String name,
 									@RequestParam String email,
 									@RequestParam String password,
-									Model model) {
+									Model model,
+									RedirectAttributes redirectAttributes) {
 		if (this.librarianService.isValidName(name) && this.librarianService.isValidEmailAddress(email) && this.librarianService.isValidPassword(password)) {
 	    	this.librarianService.registerLibrarian(new Librarian(name, email, password));
 	        librarianControllerLogger.info("LibrarianControllerLogger: Librarian successfully registered, proceeding to Login page");
-	        return "redirect:/login";
+			redirectAttributes.addFlashAttribute("successfulRegistration", "Registration successful. Please log in.");
+			return "redirect:/login";
 	    
 		} else {
 	    	if (!this.librarianService.isValidName(name)) {
