@@ -33,10 +33,18 @@
 
         <!-- Display error message if provided -->
         <p th:if="${error}" class="error-message" th:text="${error}"></p>
-        <form method="post" action="register">
-            <input type="text" name="name" placeholder="Name">
-            <input type="text" name="email" placeholder="Email Address">
-            <input type="password" name="password" placeholder="Password">
+
+        <!-- Section to fill up registration -->
+        <form method="post" action="registration">
+            <label>
+                <input type="text" name="name" placeholder="Name">
+            </label>
+            <label>
+                <input type="text" name="email" placeholder="Email Address">
+            </label>
+            <label>
+                <input type="password" name="password" placeholder="Password">
+            </label>
             <input type="submit" value="Register">
         </form>
 

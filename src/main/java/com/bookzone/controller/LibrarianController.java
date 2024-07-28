@@ -95,10 +95,10 @@ public class LibrarianController {
 	 * @return name of the Registration page
 	 */
 	
-	@GetMapping("/register")
+	@GetMapping("/registration")
 	public String goToRegistration() {
 		librarianControllerLogger.info("LibrarianControllerLogger: Currently at Registration page");
-		return "register";
+		return "registration";
 	}
 	
 	/**
@@ -110,7 +110,7 @@ public class LibrarianController {
 	 * @return Redirection to the Login page for a successful registration, or back to the Registraion page
 	 * with an error message displaying the reason(s) for unsuccessful registration
 	 */
-	@PostMapping("/register")
+	@PostMapping("/registration")
 	public String registerLibrarian(@RequestParam String name,
 									@RequestParam String email,
 									@RequestParam String password,
@@ -135,7 +135,7 @@ public class LibrarianController {
 	    		librarianControllerLogger.error("LibrarianControllerLogger: Unsuccessful registration due to invalid password, proceeding to Registration page");
 		    	model.addAttribute("error", "Unsuccessful registration due to invalid password");
 	    	}
-	    	return "register";
+	    	return "registration";
 	    }
 	}
 
