@@ -1,41 +1,43 @@
 # BookZone
-
 ## Overview
-BookZone is a platform serving librarians at the Singapore Book Collectors club in their book catalogue. Its key features include:
+BookZone is a Book Management System catered to members of the SG Book Collectors club (members with email addresses that 
+end with @sgbookcollectors.com), implemented using the MVC (Model-View-Controller) architectural pattern.
 
-+ `Adding` a book to the catalogue.
-+ `Deleting` a book from the catalogue.
-+ `Displaying all books` in the catalogue.
-+ `Displaying all Special books` in the catalogue.
-+ `Editing` a book in the catalogue.
-+ `Marking` a book as Special.
-+ `Removing a book from Specials` and retaining it in the catalogue.
+The application features adding, editing, deleting a book, as well as designating a book as Special.
+
+## Prerequisites
+- Java 17.
+- Git.
+- IntelliJ IDEA.
+- MySQL, and MySQL Workbench.
 
 ## Setup
-1. Ensure your local machine is configured with `Git, Java, Eclipse IDE, MySQL, and MySQL Workbench`.
-2. Download the [zip file](https://github.com/shumarb/bookzone/blob/main/bookzone.zip) of the project ot your local machine.
-3. Unzip the zip file. You will see a folder called `bookzone`.
-4. Open the `Eclipse IDE`.
-5. Select `File`.
-6. Select `Import`.
-7. Select `Maven`
-8. Select `Existing Maven Project`.
-9. At `Root Directory`, select `Browse`.
-10. Navigate to the folder of the unzipped `bookzone` project.
-11. Select the folder in Step 9. You will see the `bookzone` project in the Package Explorer.
-12. Change lines 6 & 7 of application.properties to the `username` and `password` of your `MySQL database`.
-13. Create a `schema` in your `MySQL Workbench` called book_zone.
+1. `Clone` this repository.
+2. Open the `IntelliJ IDE`.
+3. Select `Open` and navigate to the location of the cloned repository.
+4. Create a `schema` on the MySQL Workbench.
+5. Update `application.properties` in the `src/main/resources` folder:
+    - Line 5: Set `spring.datasource.url=jdbc:mysql://localhost:3306/name-of-your-schema`.
+    - Line 6: Set `spring.datasource.username=name-of-your-mysql-username`.
+    - Line 7: Set `spring.datasource.username=name-of-your-mysql-password`.
 
 ## Instructions
-1. Select the `>` icon of the `bookzone` project.
-2. Select the `>` icon of the `src/main/java/` folder.
-3. Select the `>` icon of the `com.bookzone` package.
-4. Right-click `BookzoneApplication.java`.
-5. Select `Run As`.
-6. Select `1. Java Application`.
-7. Open a web browser.
-8. Enter `localhost:9001`.
-9. You will see the `Index page`.
-10. `Register` a BookZone account via an email address that ends with `sgbookcollectors.com`.
-11. `Log into` BookZone.
-12. Use the BookZone portal to `add, edit, delete, or indicate a book as Special`.
+1. Right-click the `BookzoneApplication` class file (Location: `src/main/java/com/example/WorkPortal/BookzoneApplication.java`).
+2. Select `Run 'BookzoneApplic....main()`.
+3. If there are issues with running the application, perform the following before repeating Step 1:
+    - Click the `Maven icon` on the right.
+    - Navigate to `bookzone/Lifecycle`.
+    - Click `Clean`, then `Install`.
+    - Drop all tables in the schema.
+    - Close and reopen IntelliJ IDEA.
+4. Enter `localhost:9001/` in your browser after seeing the message `Started BookzoneApplication` in the `console`.
+5. Explore the application.
+6. Explore data in theMySQL Workbench:
+   - Expand the schema to view `Books`, `Librarians`, and `Specials` tables.
+   - `Books` table: Contains `id`, `author`, `category`, `title`, `year`.
+   - `Specials` table: Contains the same attributes as Books but for Special books.
+   - `Librarians` table: Contains `id`, `name`, `email`, and `password`.
+
+## Tech Stack
+- Programming: Java.
+- Frameworks/Tools: Spring Boot, JUnit, Mockito, Bootstrap, Git, HTML, MySQL.
