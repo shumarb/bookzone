@@ -1,4 +1,4 @@
-package com.bookzone.controllerTest;
+package com.bookzone.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
@@ -20,7 +20,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.bookzone.controller.BookController;
 import com.bookzone.model.Book;
 import com.bookzone.model.SpecialBook;
 import com.bookzone.service.BookService;

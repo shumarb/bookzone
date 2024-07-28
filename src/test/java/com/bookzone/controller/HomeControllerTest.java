@@ -1,4 +1,4 @@
-package com.bookzone.controllerTest;
+package com.bookzone.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -10,19 +10,20 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.ui.Model;
 
-import com.bookzone.controller.LibrarianController;
-import com.bookzone.controller.RegistrationController;
 import com.bookzone.model.Librarian;
 import com.bookzone.service.RegistrationService;
 
 @ExtendWith(MockitoExtension.class)
-class LibrarianControllerTest {
+class HomeControllerTest {
 
     @Mock
-    private LibrarianController librarianController;
+    private HomeController homeController;
 
     @Mock
     private RegistrationController registrationController;
+
+    @Mock
+    private RegistrationController undex;
 
     @Mock
     private RegistrationService registrationService;
@@ -41,28 +42,16 @@ class LibrarianControllerTest {
 
     @BeforeEach
 	void setUp() throws Exception {
-		librarianController = new LibrarianController();
+		homeController = new HomeController();
 		registrationService = new RegistrationService();
 		librarian1 = new Librarian("John Brooks", "john_brooks", "john.brooks@sgbookcollectors.com", "OOO123mmm");
 		librarian2 = new Librarian("Chris Evans","chris.evans", "chris.evans@gmailcom.com", "CHRisEVANs12344");
 	}
     
     @Test
-    void test_goToIndex() {
-        String result = librarianController.goToIndex();
-        assertEquals("index", result);
-    }
-
-    @Test
-    void test_goToHome() {
-        String result = librarianController.goToHome();
+    void test_showHome() {
+        String result = homeController.showHome();
         assertEquals("home", result);
-    }
-
-    @Test
-    void test_goToLogin() {
-        String result = librarianController.goToLogin();
-        assertEquals("login", result);
     }
 
     @Test
@@ -73,7 +62,7 @@ class LibrarianControllerTest {
     
     @Test
     void test_logoutLibrarian() {
-        String result = librarianController.logoutLibrarian();
+        String result = homeController.logoutLibrarian();
         assertEquals("redirect:/", result);
     }
 
