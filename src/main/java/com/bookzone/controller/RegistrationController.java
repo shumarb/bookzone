@@ -4,7 +4,6 @@
 
 package com.bookzone.controller;
 
-import com.bookzone.model.Librarian;
 import com.bookzone.model.Person;
 import com.bookzone.service.RegistrationService;
 import org.apache.logging.log4j.LogManager;
