@@ -63,7 +63,7 @@ public class RegistrationController {
                                  Model model,
                                  RedirectAttributes redirectAttributes) {
         if (this.registrationService.isValidName(name) && this.registrationService.isValidEmailAddress(email) && this.registrationService.isValidPassword(password)) {
-            this.registrationService.registerLibrarian(new Librarian(name, username, email, password));
+            this.registrationService.registerLibrarian(name, username, email, password);
             registrationControllerLogger.info("RegistrationControllerLogger: Librarian successfully registered, proceeding to Login page");
             redirectAttributes.addFlashAttribute("successfulRegistration", "Registration successful. Please log in.");
             return "redirect:/login";

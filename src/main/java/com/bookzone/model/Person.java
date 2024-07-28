@@ -51,7 +51,6 @@ public class Person {
      * Role of a {@link Person} entity.
      * This attribute must be unique across all the {@link Person} entities.
      */
-    @Column(unique = true)
     private String role;
 
     /**

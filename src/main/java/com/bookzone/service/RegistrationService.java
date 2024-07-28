@@ -1,21 +1,12 @@
 /**
- * RegistrationService.java manages the Librarian object.
- * 
- * There are 2 operations involved to manage a Librarian object:
- * 
- * 1. Registering a librarian.
- * This is when the librarian does not have a BookZone account.
- *
- * 2. Logging the librarian into BookZone.
- * This is when the librarian attempts to log into BookZone using
- * his/her email address and password stored in the librarians table
- * in the MySQL database of the book_zone schema.
+ * Service class for handling registration of {@link Person} entities.
  */
 
 package com.bookzone.service;
 
 import java.util.Optional;
 
+import com.bookzone.model.Person;
 import com.bookzone.repository.PersonRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -28,116 +19,115 @@ import com.bookzone.model.Librarian;
 public class RegistrationService {
 
 	/**
-	 * Logger for RegistrationService
+	 * Logger to monitor operational flow and facilitate troubleshooting.
 	 */
-	private static final Logger librarianServiceLogger = LogManager.getLogger(RegistrationService.class);
-	
+	private static final Logger registrationServiceLogger = LogManager.getLogger(RegistrationService.class);
+
+	/**
+	 * Repository for performing CRUD operation on {@link Person} entities..
+	 */
 	@Autowired
 	private PersonRepository personRepository;
 	
 	/**
-	 * Register a librarian by checking if the librarian's account exists in the BookZone database
-	 * If not, save the name, email address, and password that the Librarian has enteered into the MySQL database
-	 * 
-	 * @param: Librarian object, which comprises of the name, email, and password the Librarian has entered at the Registration page
-	 * @retur: True if librarian's account exists, false otherwise
+	 * Registers a {@link Librarian} entity.
+	 *
+	 * @param name		The name of the {@link Librarian} entity.
+	 * @param username  The username of the {@link Librarian} entity.
+	 * @param email		The email address of the {@link Librarian} entity.
+	 * @param password	The password of the {@link Librarian} entity.
 	 */
-	public void registerLibrarian(Librarian librarian) {
-		librarianServiceLogger.info("LibrarianServiceLogger: Email address provided is available");
-		this.personRepository.save(librarian);
+	public void registerLibrarian(String name,
+								  String username,
+								  String email,
+								  String password) {
+		this.personRepository.save(new Librarian(name, username, email, password));
+		Person librarian = personRepository.findByEmail(email).get();
+		registrationServiceLogger.info("RegistrationServiceLogger: Librarian registered: {}", librarian.toString());
 	}
 	
 	/**
-	 * Checks if an email address is taken
+	 * Checks if an email address is valid.
 	 * 
-	 * @params Email address
-	 * @return True if email address exists in database, false otherwise
+	 * @param email The Email address to check.
+	 * @return True if email address is valid, false otherwise
 	 */
 	public boolean isValidEmailAddress(String email) {
 		Optional<Librarian> librarianOptional = this.personRepository.findByEmail(email);
 		
 		// 1. Check if email address provided exists
 		if (librarianOptional.isPresent()) {
-			librarianServiceLogger.error("LibrarianServiceLogger: Email address provided is unavailable");
+			registrationServiceLogger.error("RegistrationServiceLogger: Email address provided is unavailable");
 			return false;
 		}
 		
 		// 2. Check if email address provided ends with @sgbookcollectors.com
 		if (isEndWithCompanyEmailAddress(email)) {
-			
-			librarianServiceLogger.info("LibrarianServiceLogger: Email address provided is valid");
+			registrationServiceLogger.info("RegistrationServiceLogger: Email address provided is valid");
 			return true;
-			
-		} else {
-			
-			librarianServiceLogger.error("LibrarianServiceLogger: Email address provided is invalid");
-			
 		}
+		registrationServiceLogger.error("RegistrationServiceLogger: Email address provided is invalid");
 		return false;
 	}
 	
 	/**
-	 * Checks if password has at least 8 characters
+	 * Checks if password has at least 8 characters.
 	 * 
-	 * @params: Password
-	 * @return: True if password has at least 8 characters, false otherwise
+	 * @param 	password The password to check.
+	 * @return 	True if password has at least 8 characters, false otherwise.
 	 */
 	public boolean hasAtLeastEightCharacters(String password) {
 		return password.length() >= 8;
 	}
 	
 	/**
-	 * Checks if email address entered is valid
+	 * Checks if email address entered is valid.
 	 * 
-	 * @params: Email address
-	 * @return: True if email address ends with @sgbookcollectors.com, false otherwise
+	 * @param email The email address to check.
+	 * @return True if email address ends with @sgbookcollectors.com, false otherwise.
 	 */
 	public boolean isEndWithCompanyEmailAddress(String email) {
-	
 		if (email.endsWith("@sgbookcollectors.com")) {
-			
-			librarianServiceLogger.info("LibrarianServiceLogger: Email address provided ends with @sgbookcollectors.com");
+			registrationServiceLogger.info("LibrarianServiceLogger: Email address provided ends with @sgbookcollectors.com");
 			return true;
 		}
-		
-		librarianServiceLogger.error("LibrarianServiceLogger: Email address provided does not end with @sgbookcollectors.com");
+		registrationServiceLogger.error("LibrarianServiceLogger: Email address provided does not end with @sgbookcollectors.com");
 		return false;
 	}
 	
 	/**
-	 * Checks if name if valid
+	 * Checks if the name is valid.
 	 * 
-	 * @params: Name
-	 * @return: True if name has at least 2 words, and each word has at least 3 characters
+	 * @param name The name to check.
+	 * @return True if name has at least 2 words, and each word has at least 3 characters.
 	 */
 	public boolean isValidName(String name) {
 		String[] nameValues = name.split(" ");
 		// 1. Invalid if name has less than 2 words
 		if (nameValues.length < 2) {
-			librarianServiceLogger.error("LibrarianServiceLogger: Name has less than 2 words");
+			registrationServiceLogger.error("LibrarianServiceLogger: Name has less than 2 words");
 			return false;
 		}
 		
 		// 2. Invalid if each word has less than 3 characters
-		for (int i = 0; i < nameValues.length; i++) {
-			if (nameValues[i].length() < 3) {
-				librarianServiceLogger.info("LibrarianServiceLogger: At least 1 word in the name has less than 3 characters");
-				return false;
-			}
-		}
+        for (String nameValue : nameValues) {
+            if (nameValue.length() < 3) {
+                registrationServiceLogger.info("LibrarianServiceLogger: At least 1 word in the name has less than 3 characters");
+                return false;
+            }
+        }
 		
 		// 3. Name has at least 2 words, and each word has at least 3 characters
 		// Check if every character in the word is a letter
 		// Invalid if there exists at least 1 character that is not a letter
-		for (int i = 0; i < nameValues.length; i++) {
-			String word = nameValues[i];
-			if (word != null && !word.matches("[a-zA-Z]+")) {
-				librarianServiceLogger.error("LibrarianServiceLogger: There is at least 1 character detected in the name");
-				return false;
-			}
-		}
+        for (String word : nameValues) {
+            if (word != null && !word.matches("[a-zA-Z]+")) {
+                registrationServiceLogger.error("LibrarianServiceLogger: There is at least 1 character detected in the name");
+                return false;
+            }
+        }
 		
-		librarianServiceLogger.info("LibrarianServiceLogger: Valid name");
+		registrationServiceLogger.info("LibrarianServiceLogger: Valid name");
 		return true;
 	}
 	
@@ -145,9 +135,9 @@ public class RegistrationService {
 	 * Checks if password has at least 3 uppercase letters,
 	 * at least 3 lowercase letters, and at least 2 numbers
 	 * 
-	 * @params: Password
-	 * @return: True if password has at least 3 uppercase letters,
-	 * at least 3 lowercase letters, and at least 2 numbers
+	 * @param 	password The password to check
+	 * @return True if password has at least 3 uppercase letters, at least 3 lowercase letters,
+	 * and at least 2 numbers valid password, false otherwise.
 	 */
 	public boolean hasSufficientUpperCaseAndLowerCaseAndNumbers(String password) {
 		int numberOfUpperCaseLetters = 0;
@@ -168,46 +158,44 @@ public class RegistrationService {
 	    }
 	    
 	    if (numberOfUpperCaseLetters >= 3 && numberOfLowerCaseLetters >= 3 && numberOfNumbers >= 2) {
-	    	librarianServiceLogger.info("LibrarianServiceLogger: Valid password: Password has at least 8 characters and contains at least 3 are uppercase letters, at least 3 lowercase letters, and at least 2 numbers");
+	    	registrationServiceLogger.info("LibrarianServiceLogger: Valid password: Password has at least 8 characters and contains at least 3 are uppercase letters, at least 3 lowercase letters, and at least 2 numbers");
 	    } else {
-	    	librarianServiceLogger.info("LibrarianServiceLogger: Invalid password: Password has at least 8 characters and at least one of these situations: less than 3 uppercase letters, less than 3 lowercase letters, and less than 2 numbers");     	
+	    	registrationServiceLogger.info("LibrarianServiceLogger: Invalid password: Password has at least 8 characters and at least one of these situations: less than 3 uppercase letters, less than 3 lowercase letters, and less than 2 numbers");
 	    }
 	    return numberOfUpperCaseLetters >= 3 && numberOfLowerCaseLetters >= 3 && numberOfNumbers >= 2;
 	}
 	
 	/**
-	 * Checks if password provided is valid
+	 * Checks if password provided is valid.
 	 * 
-	 * @params: Password
-	 * @return: True if valid password, false otherwise
+	 * @param password The password to check.
+	 * @return True if valid password, false otherwise.
 	 */
 	public boolean isValidPassword(String password) {
 	    return hasAtLeastEightCharacters(password) && hasSufficientUpperCaseAndLowerCaseAndNumbers(password);
 	}
 	
 	/**
-	 * Log the librarian into BookZone by checking if the librarian's email address exists
-	 * 
-	 * If it does exist, check if the password provided is correct.
-	 * If both these checks passed, the librarian has entered the correct login details and hence
-	 * logs into BookZone. Otherwise, access into BookZone is denied.
-	 * 
-	 * @params: Email address and password of the librarian
-	 * @result: True if librarian enters valid email address and password, false otherwise
+	 * Log the {@link Librarian} entity into the application.
+	 *
+	 * @param email 	The email address to check.
+	 * @param password  The password to check.
+	 * @return True if email and password matches that of an existing {@link Librarian} entity, false otherwise.
 	 */
 	public boolean loginLibrarian(String email, String password) {
 		Optional<Librarian> librarianOptional = this.personRepository.findByEmail(email);
 		if (librarianOptional.isPresent()) {
 			Librarian librarian = librarianOptional.get();
 			if (librarian.getPassword().equals(password)) {
-				librarianServiceLogger.error("LibrarianServiceLogger: Email address provided exists and password provided is correct");
+				registrationServiceLogger.error("LibrarianServiceLogger: Email address provided exists and password provided is correct");
 				return true;
 			} else {
-				librarianServiceLogger.error("LibrarianServiceLogger: Email address provided exists but password provided is incorrect");
+				registrationServiceLogger.error("LibrarianServiceLogger: Email address provided exists but password provided is incorrect");
 			}
 		} else {
-			librarianServiceLogger.error("LibrarianServiceLogger: Email address provided does not exist");
+			registrationServiceLogger.error("LibrarianServiceLogger: Email address provided does not exist");
 		}
 		return false;
 	}
+
 }
