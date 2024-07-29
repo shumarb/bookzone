@@ -16,19 +16,19 @@ public class Person {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    protected long id;
 
     /**
      * Name of a {@link Person} entity.
      */
-    private String name;
+    protected String name;
 
 
     /**
      * Username of a {@link Person} entity.
      */
     @Column(unique = true)
-    private String username;
+    protected String username;
 
 
     /**
@@ -36,7 +36,7 @@ public class Person {
      * This attribute must be unique across all the {@link Person} entities.
      */
     @Column(unique = true)
-    private String email;
+    protected String email;
 
 
     /**
@@ -44,14 +44,14 @@ public class Person {
      * This attribute must be unique across all the {@link Person} entities.
      */
     @Column(unique = true)
-    private String password;
+    protected String password;
 
 
     /**
      * Role of a {@link Person} entity.
      * This attribute must be unique across all the {@link Person} entities.
      */
-    private String role;
+    protected String role;
 
     /**
      * Default no-args constructor as required by Hibernate.
