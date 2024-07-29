@@ -1,4 +1,4 @@
-package com.bookzone.controllerTest;
+package com.bookzone.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.times;
@@ -11,7 +11,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.ui.Model;
 
-import com.bookzone.controller.SpecialBookController;
 import com.bookzone.service.SpecialBookService;
 
 @ExtendWith(MockitoExtension.class)

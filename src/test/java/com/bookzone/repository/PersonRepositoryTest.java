@@ -1,34 +1,32 @@
-package com.bookzone.repositoryTest;
+package com.bookzone.repository;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import java.util.Optional;
 
+import com.bookzone.model.Person;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.bookzone.model.Librarian;
-import com.bookzone.repository.LibrarianRepository;
 
 @ExtendWith(MockitoExtension.class)
-class LibrarianRepositoryTest {
+class PersonRepositoryTest {
 
     @Mock
-    private LibrarianRepository librarianRepository;
+    private PersonRepository personRepository;
 
     @Test
     void testFindByEmail() {
         String email = "mike.lee@sgbookcollectors.com";
-        Librarian librarian = new Librarian(1, "Mike Lee", email, "MMM22llla3");
-        when(librarianRepository.findByEmail(email)).thenReturn(Optional.of(librarian));
+        Person librarian = new Librarian("Mike Lee", "mike_lee", email, "MMM22llla3");
 
-        Optional<Librarian> optionalLibrarian = librarianRepository.findByEmail(email);
+        Optional<Librarian> optionalLibrarian = personRepository.findByEmail(email);
 
-        verify(librarianRepository).findByEmail(email);
+        verify(personRepository).findByEmail(email);
         assertEquals(librarian, optionalLibrarian.orElse(null));
     }
 }

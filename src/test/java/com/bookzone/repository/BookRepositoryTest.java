@@ -1,4 +1,4 @@
-package com.bookzone.repositoryTest;
+package com.bookzone.repository;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
@@ -13,7 +13,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.bookzone.model.Book;
-import com.bookzone.repository.BookRepository;
 import com.bookzone.service.BookService;
 
 @ExtendWith(MockitoExtension.class)
