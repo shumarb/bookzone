@@ -60,7 +60,8 @@ public class BookController {
 	/**
 	 * Gets all books in the catalogue
 	 * 
-	 * @return
+	 * @return 	A ModelAndView object containing the view name of the Catalogue page,
+	 * 			a model attribute "book", and a list of books retrieved from the the book service.
 	 */
 	@GetMapping("/catalogue")
 	public ModelAndView getAllBooks() {
@@ -71,8 +72,9 @@ public class BookController {
 	
 	/**
 	 * Adds a Book to the catalogue
+	 *
 	 * @param book: Book object to add to catalogue
-	 * @return a redirect to the Catalogue page
+	 * @return A redirect to the Catalogue page
 	 */
 	@PostMapping("/save")
 	public String addBook(@ModelAttribute Book book) {
@@ -98,8 +100,8 @@ public class BookController {
 	/**
 	 * Adds a Book to the SpecialBook list
 	 * 
-	 * @param id: The id of the Book to be added to the SpecialBook list
-	 * @return a redirect to the name of the SpecialBook page
+	 * @param id 	The id of the Book to be added to the SpecialBook list
+	 * @return  	A redirection to the view name of the SpecialBook page
 	 */
 	@RequestMapping("/addBookToSpecials/{id}")
 	public String addBookToSpecials(@PathVariable("id") long id) {
@@ -113,9 +115,9 @@ public class BookController {
 	/**
 	 * Retrieves a Book to edit by id
 	 * 
-	 * @param id: Id of the Book to edit
-	 * @param model: The model that the Book will be added
-	 * @return The name of the edit page
+	 * @param id Id of the Book to edit
+	 * @param model The model that the Book will be added
+	 * @return The view name of the edit page
 	 */
 	@RequestMapping("/editBook/{id}")
 	public String editBook(@PathVariable("id") long id, Model model) {
@@ -129,8 +131,8 @@ public class BookController {
 	 * Deletes a Book from the catalogue by it's id,
 	 * as well as the SpecialBook list if it exists
 	 * 
-	 * @param id: Id of Book to be deleted
-	 * @return: Redirection to the Catalogue page
+	 * @param id 	Id of Book to be deleted
+	 * @return 		Redirection to the view name of the catalogue page
 	 */
 	@RequestMapping("/deleteBook/{id}")
 	public String deleteBook(@PathVariable("id") long id) {
