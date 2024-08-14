@@ -48,9 +48,9 @@ public class LoginController {
      * with an error message displayed for unsuccessful login
      */
     @PostMapping("/login")
-    public String loginLibrarian(@RequestParam String email,
-                                 @RequestParam String password,
-                                 Model model) {
+    public String login(@RequestParam String email,
+                        @RequestParam String password,
+                        Model model) {
         boolean doesLibrarianExist = this.loginService.login(email, password);
         if (doesLibrarianExist) {
             loginControllerLogger.info("LoginControllerLogger: Successful login. Proceeding to Home page");

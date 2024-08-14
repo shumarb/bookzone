@@ -5,16 +5,10 @@
 package com.bookzone.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @Entity
 @Table(name = "person")
 @Inheritance(strategy = InheritanceType.JOINED)
-@NoArgsConstructor
-@Getter
-@ToString
 public class Person {
 
     /**
@@ -56,7 +50,15 @@ public class Person {
     protected String role;
 
     /**
+     * Default no-args constructor as required by Hibernate.
+     */
+    public Person() {
+
+    }
+
+    /**
      * Constructs a new {@link Person} entity with each attribute assigned to its corresponding provided values.
+     *
      * @param name          The name of the Person entity.
      * @param username      The username of the Person entity.
      * @param email         The email of the Person entity.
@@ -69,6 +71,26 @@ public class Person {
         this.email = email;
         this.password = password;
         this.role = role;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
 }
