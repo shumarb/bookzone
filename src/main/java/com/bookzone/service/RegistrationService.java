@@ -38,13 +38,13 @@ public class RegistrationService {
 	 * @param email		The email address of the {@link Librarian} entity.
 	 * @param password	The password of the {@link Librarian} entity.
 	 */
-	public Person registration(String name, String username, String email, String password) throws InvalidNameException,
-																								 InvalidUsernameException,
-																								 InvalidEmailAddressException,
-																								 InvalidPasswordException,
-																								 UnavailableUsernameException,
-																								 UnavailableEmailAddressException,
-																								 UnavailablePasswordException {
+	public Person registration(String name, String username, String email, String password) throws 	InvalidNameException,
+																								 	InvalidUsernameException,
+																								 	InvalidEmailAddressException,
+																								 	InvalidPasswordException,
+																								 	UnavailableUsernameException,
+																								 	UnavailableEmailAddressException,
+																								 	UnavailablePasswordException {
 
 		if (!isValidName(name)) {
 			throw new InvalidNameException();
