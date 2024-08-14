@@ -51,7 +51,7 @@ public class LoginController {
     public String loginLibrarian(@RequestParam String email,
                                  @RequestParam String password,
                                  Model model) {
-        boolean doesLibrarianExist = this.loginService.loginLibrarian(email, password);
+        boolean doesLibrarianExist = this.loginService.login(email, password);
         if (doesLibrarianExist) {
             loginControllerLogger.info("LoginControllerLogger: Successful login. Proceeding to Home page");
             return "redirect:/home";

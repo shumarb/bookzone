@@ -42,18 +42,18 @@ public class LoginService {
      * @param password  The password to check.
      * @return True if email and password matches that of an existing {@link Librarian} entity, false otherwise.
      */
-    public boolean loginLibrarian(String email, String password) {
-        Optional<Librarian> librarianOptional = this.personRepository.findByEmail(email);
+    public boolean login(String email, String password) {
+        Optional<Librarian> librarianOptional = personRepository.findByEmail(email);
         if (librarianOptional.isPresent()) {
             Librarian librarian = librarianOptional.get();
             if (librarian.getPassword().equals(password)) {
-                loginServiceLogger.error("LoginServiceLogger: Email address provided exists and password provided is correct");
+                loginServiceLogger.error("Email address provided exists and password provided is correct");
                 return true;
             } else {
-                loginServiceLogger.error("LoginServiceLogger: Email address provided exists but password provided is incorrect");
+                loginServiceLogger.error("Email address provided exists but password provided is incorrect");
             }
         } else {
-            loginServiceLogger.error("LoginServiceLogger: Email address provided does not exist");
+            loginServiceLogger.error("Email address provided does not exist.");
         }
         return false;
     }
