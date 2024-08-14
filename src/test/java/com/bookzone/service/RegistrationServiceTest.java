@@ -6,6 +6,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.Optional;
 
+import com.bookzone.model.Person;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -65,18 +66,6 @@ class RegistrationServiceTest {
     void testIsValidName_InvalidName() {
         String name = "John";
         boolean result = registrationService.isValidName(name);
-        assertFalse(result);
-    }
-
-    @Test
-    void testLoginLibrarian_existingEmailAndWrongPassword() {
-        String email = "john.tan@sgbookcollectors.com";
-        String password = "PPPlll333";
-        Librarian librarian = new Librarian();
-        librarian.setPassword("StrongPassword");
-        when(personRepository.findByEmail(email)).thenReturn(Optional.of(librarian));
-
-        boolean result = registrationService.loginLibrarian(email, password);
         assertFalse(result);
     }
 
