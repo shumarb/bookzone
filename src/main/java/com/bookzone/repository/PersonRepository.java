@@ -6,6 +6,7 @@ package com.bookzone.repository;
 
 import java.util.Optional;
 
+import com.bookzone.model.Person;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -21,7 +22,7 @@ public interface PersonRepository extends JpaRepository<Librarian, Long> {
 	 * @return an Optional of type Librarian that matches the given email,
 	 * or empty if no Librarian with the given email exists.
 	 */
-	Optional<Librarian> findByEmail(String email);
+	Optional<Person> findByEmail(String email);
 
 	/**
 	 * Retrieves a Librarian based on username.
@@ -30,7 +31,7 @@ public interface PersonRepository extends JpaRepository<Librarian, Long> {
 	 * @return an Optional of type Librarian that matches the given username,
 	 * or empty if no Librarian with the given username exists.
 	 */
-	Optional<Librarian> findByUsername(String username);
+	Optional<Person> findByUsername(String username);
 
 	/**
 	 * Retrieves a Librarian based on password
@@ -39,5 +40,5 @@ public interface PersonRepository extends JpaRepository<Librarian, Long> {
 	 * @return an Optional of type Librarian that matches the given password,
 	 * or empty if no Librarian with the given password exists
 	 */
-	Optional<Librarian> findByPassword(String password);
+	Optional<Person> findByPassword(String password);
 }

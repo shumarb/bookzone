@@ -4,6 +4,8 @@
 
 package com.bookzone.controller;
 
+import com.bookzone.exceptions.UnsuccessfulLoginException;
+import com.bookzone.model.Person;
 import com.bookzone.service.LoginService;
 import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
@@ -39,25 +41,29 @@ public class LoginController {
     }
 
     /**
-     * Manages a Librarian's login process
+     * Manages a Librarian's login process,
      *
-     * @param email email address of the Librarian
-     * @param password password of the Librarian
-     * @param model The model where attributes can be added for the view
-     * @return Redirection to the Home page for a successful login, or back to the login page
-     * with an error message displayed for unsuccessful login
+     * @param email     The email address of the {@link Person} entity attempting to log in.
+     * @param password  The password of the {@link Person} entity attempting to log in.
+     * @param model     The model where attributes can be added for the view
+     * @return          Redirection to the Home page for a successful login, or back to the login page
+     *                  with an error message displayed for unsuccessful login
      */
     @PostMapping("/login")
-    public String login(@RequestParam String email,
-                        @RequestParam String password,
-                        Model model) {
-        boolean doesLibrarianExist = this.loginService.login(email, password);
-        if (doesLibrarianExist) {
+    public String login(@RequestParam String email, @RequestParam String password, Model model) {
+        try {
+            loginService.login(email, password);
             loginControllerLogger.info("LoginControllerLogger: Successful login. Proceeding to Home page");
             return "redirect:/home";
-        } else {
+
+        } catch (UnsuccessfulLoginException e) {
             loginControllerLogger.error("LoginControllerLogger: Unsuccessful login. Proceeding to Login page with error message displayed.");
             model.addAttribute("error", "Invalid email or password. Please try again.");
+            return "login";
+
+        } catch (Exception e) {
+            loginControllerLogger.error("Unsuccessful login. Proceeding to Login page with error message displayed.");
+            model.addAttribute("error", "Unexpected error occurred. Please try again later.");
             return "login";
         }
     }
