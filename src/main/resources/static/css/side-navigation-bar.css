@@ -20,10 +20,6 @@
     background-color:#495057;
 }
 
-.active {
-    background-color:#007bff;
-}
-
 .sidebar .navbar-brand {
     padding:15px;
     font-size:1.5rem;
@@ -33,5 +29,6 @@
 }
 
 .content {
-    margin-left:260px;
+    margin-left:250px;
+    padding: 20px;
 }
