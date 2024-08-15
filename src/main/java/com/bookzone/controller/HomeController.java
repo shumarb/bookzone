@@ -41,8 +41,10 @@ public class HomeController {
 	 * @return redirection to the Index page
 	 */
 	@GetMapping("/logout")
-	public String logout(RedirectAttributes redirectAttributes) {
-		homeControllerLogger.info("Librarian logged out, proceeding to Index page");
+	public String logout(HttpSession httpSession, RedirectAttributes redirectAttributes) {
+		Person loggedInPerson = (Person) httpSession.getAttribute("loggedInPerson");
+		httpSession.invalidate();
+		homeControllerLogger.info("Logging out {}, proceeding to Index page with successful logout message displayed.", loggedInPerson.toString());
 		redirectAttributes.addFlashAttribute("successfulLogout", "You have successfully logged out.");
 		return "redirect:/";
 	}
