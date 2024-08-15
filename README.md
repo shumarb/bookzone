@@ -1,7 +1,7 @@
 # BookZone
 ## Overview
 BookZone is a Book Management System catered to members of the SG Book Collectors club (members with email addresses that 
-end with @sgbookcollectors.com), implemented using the MVC (Model-View-Controller) architectural pattern.
+end with `@sgbookcollectors.com`), implemented using the MVC (Model-View-Controller) architectural pattern.
 
 The application features adding, editing, deleting a book, as well as designating a book as Special.
 
@@ -20,6 +20,7 @@ The application features adding, editing, deleting a book, as well as designatin
     - Line 5: Set `spring.datasource.url=jdbc:mysql://localhost:3306/name-of-your-schema`.
     - Line 6: Set `spring.datasource.username=name-of-your-mysql-username`.
     - Line 7: Set `spring.datasource.username=name-of-your-mysql-password`.
+6. Run `git pull origin main` to ensure you have the latest version of the repository.
 
 ## Instructions
 1. Right-click the `BookzoneApplication` class file (Location: `src/main/java/com/example/WorkPortal/BookzoneApplication.java`).
