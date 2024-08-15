@@ -19,33 +19,40 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class HomeController {
 
 	/**
-	 * Logger used for logging messages of the LibrarianController
+	 * Logger to monitor operational flow and facilitate troubleshooting.
 	 */
-	private static final Logger homeControllerLogger = LogManager.getLogger(HomeController.class);
+	private static final Logger logger = LogManager.getLogger(HomeController.class);
 	
 	/**
-	 * Goes to the Home page
-	 * 
-	 * @return name of the Home page
+	 * Handles the GET request for the Home page.
+	 * Retrieves the logged-in {@link Person}'s details from the session and adds them to the model.
+	 *
+	 * @param httpSession	The HTTP session containing the logged-in {@link Person}'s information.
+	 * @param model			The model to add attributes for the view.
+	 * @return 				The name of the view for the Home page.
 	 */
 	@GetMapping("/home")
 	public String showHome(HttpSession httpSession, Model model) {
 		Person loggedInPerson = (Person) httpSession.getAttribute("loggedInPerson");
-		homeControllerLogger.info("Currently at Home page. Accessed by {}", loggedInPerson.toString());
+		logger.info("Currently at Home page. Accessed by {}", loggedInPerson.toString());
 		model.addAttribute("loggedInPerson", loggedInPerson);
 		return "home";
 	}
 
 	/**
-	 * Logs out the Librarian
-	 * 
-	 * @return redirection to the Index page
+	 * Handles the logout process for the logged-in {@link Person}.
+	 * Invalidates the current session, logs the logout event,
+	 * and redirects to the index page with a successful logout message displayed.
+	 *
+	 * @param httpSession 			The HTTP session to be invalidated.
+	 * @param redirectAttributes   	The attributes to add for redirection with flash message.
+	 * @return 						A redirect to the Index page with a successful logout message.
 	 */
 	@PostMapping("/logout")
 	public String logout(HttpSession httpSession, RedirectAttributes redirectAttributes) {
 		Person loggedInPerson = (Person) httpSession.getAttribute("loggedInPerson");
 		httpSession.invalidate();
-		homeControllerLogger.info("Successful logout | {}", loggedInPerson.toString());
+		logger.info("Successful logout | {}", loggedInPerson.toString());
 		redirectAttributes.addFlashAttribute("successfulLogout", "You have successfully logged out.");
 		return "redirect:/";
 	}
