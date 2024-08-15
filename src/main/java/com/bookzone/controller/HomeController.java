@@ -9,6 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class HomeController {
@@ -25,7 +26,7 @@ public class HomeController {
 	 */
 	@GetMapping("/home")
 	public String showHome() {
-		homeControllerLogger.info("LibrarianControllerLogger: Currently at Home page");
+		homeControllerLogger.info("Currently at Home page");
 		return "home";
 	}
 
@@ -35,8 +36,9 @@ public class HomeController {
 	 * @return redirection to the Index page
 	 */
 	@GetMapping("/logout")
-	public String logoutLibrarian() {
-		homeControllerLogger.info("LibrarianControllerLogger: Librarian logged out, proceeding to Index page");
+	public String logout(RedirectAttributes redirectAttributes) {
+		homeControllerLogger.info("Librarian logged out, proceeding to Index page");
+		redirectAttributes.addFlashAttribute("successfulLogout", "You have successfully logged out.");
 		return "redirect:/";
 	}
 	

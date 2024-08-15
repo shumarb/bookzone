@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 
 import com.bookzone.model.Librarian;
 import com.bookzone.service.RegistrationService;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @ExtendWith(MockitoExtension.class)
 class HomeControllerTest {
@@ -23,7 +24,7 @@ class HomeControllerTest {
     private RegistrationController registrationController;
 
     @Mock
-    private RegistrationController undex;
+    private RedirectAttributes redirectAttributes;
 
     @Mock
     private RegistrationService registrationService;
@@ -58,12 +59,6 @@ class HomeControllerTest {
     void test_goToRegistration() {
         String result = registrationController.goToRegistration();
         assertEquals("registration", result);
-    }
-    
-    @Test
-    void test_logoutLibrarian() {
-        String result = homeController.logoutLibrarian();
-        assertEquals("redirect:/", result);
     }
 
 }

@@ -9,6 +9,12 @@
 <body>
     <div class="container">
         <h2>BookZone</h2>
+
+        <!-- Message for successful logout -->
+        <div th:if="successfulLogout" class="successful-logout">
+            <p th:text="${successfulLogout}"></p>
+        </div>
+
         <a th:href="@{/login}">Login</a>
         <a th:href="@{/registration}">Register</a>
     </div>
