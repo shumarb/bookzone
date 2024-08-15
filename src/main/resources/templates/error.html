@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,8 +10,8 @@
     <div class="container">
 		<h1>Error 404</h1>
         <h3>The page you are looking for does not exist</h3>
-        <a href="/login">Login</a>
-        <a href="/registration">Register</a>
+        <a th:href="@{/login}">Login</a>
+        <a th:href="@{/registration}">Register</a>
     </div>
 </body>
 </html>
