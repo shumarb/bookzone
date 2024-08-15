@@ -9,9 +9,4 @@ function validateForm() {
         return false;
     }
 
-    if (year !== "" && year < 1965) {
-        alert("Year must be at least 1965");
-            return false;
-    }
-
 }
