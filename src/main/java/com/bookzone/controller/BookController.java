@@ -51,7 +51,7 @@ public class BookController {
 	 * 
 	 * @return name of Add page
 	 */
-	@GetMapping("/addBook")
+	@GetMapping("/add")
 	public String goToAdd() {
 		bookControllerLogger.info("BookControllerLogger: Librarian is at the Add page");
 		return "add";
