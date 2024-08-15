@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.com">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,7 +23,7 @@
 
                 <li>Username</li>
                 <ul>
-                    <li>A single word comprising of at least 5 characters.</li>
+                    <li>A single word comprising at least 5 characters.</li>
                 </ul>
                 <br>
 
@@ -46,7 +46,7 @@
         <p th:if="${error}" class="error-message" th:text="${error}"></p>
 
         <!-- Section to fill up for registration -->
-        <form method="post" action="registration">
+        <form method="post" th:action="@{/registration}">
             <label>
                 <input type="text" name="name" placeholder="Name" required>
             </label>
