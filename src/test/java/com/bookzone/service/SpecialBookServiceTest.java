@@ -38,7 +38,7 @@ class SpecialBookServiceTest {
     }
 
     @Test
-    void testSaveMyBooks() {
+    void testSaveBookMyBooks() {
         specialBookService.saveSpecialBook(specialBook1);
         verify(specialBookRepository, times(1)).save(specialBook1);
     }
@@ -56,7 +56,7 @@ class SpecialBookServiceTest {
     }
 
     @Test
-    void testDeleteById() {
+    void testDeleteBook() {
         long id = specialBook1.getId();
         doNothing().when(specialBookRepository).deleteById(id);
         specialBookService.deleteSpecialBookById(id);

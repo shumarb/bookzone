@@ -1,0 +1,15 @@
+com/bookzone/BookzoneApplicationTests.class
+com/bookzone/controller/IndexControllerTest.class
+com/bookzone/controller/HomeControllerTest.class
+com/bookzone/controller/ErrorPageControllerTest.class
+com/bookzone/repository/SpecialBookRepositoryTest.class
+com/bookzone/model/LibrarianTest.class
+com/bookzone/service/BookServiceTest.class
+com/bookzone/service/RegistrationServiceTest.class
+com/bookzone/service/SpecialBookServiceTest.class
+com/bookzone/model/BookTest.class
+com/bookzone/controller/SpecialBookControllerTest.class
+com/bookzone/controller/BookControllerTest.class
+com/bookzone/repository/BookRepositoryTest.class
+com/bookzone/model/SpecialBookTest.class
+com/bookzone/repository/PersonRepositoryTest.class

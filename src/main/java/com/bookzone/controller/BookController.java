@@ -30,9 +30,9 @@ import com.bookzone.service.SpecialBookService;
 public class BookController {
 
 	/**
-	 * Logger used for logging messages of the BookController class
+	 * Logger to monitor operational flow and facilitate troubleshooting.
 	 */
-	private static final Logger bookControllerLogger = LogManager.getLogger(BookController.class);
+	private static final Logger logger = LogManager.getLogger(BookController.class);
 	
 	/**
 	 * BookService for accessing and managing the Book entities
@@ -47,18 +47,18 @@ public class BookController {
 	private SpecialBookService specialBookService;
 	
 	/**
-	 * Goes to Add page 
+	 * Shows the Add Book page.
 	 * 
-	 * @return name of Add page
+	 * @return name of Add page.
 	 */
 	@GetMapping("/add")
-	public String goToAdd() {
-		bookControllerLogger.info("BookControllerLogger: Librarian is at the Add page");
+	public String showAdd() {
+		logger.info("Currently at Add page.");
 		return "add";
 	}
 	
 	/**
-	 * Gets all books in the catalogue
+	 * Gets all books in the catalogue.
 	 * 
 	 * @return 	A ModelAndView object containing the view name of the Catalogue page,
 	 * 			a model attribute "book", and a list of books retrieved from the the book service.
@@ -66,66 +66,65 @@ public class BookController {
 	@GetMapping("/catalogue")
 	public ModelAndView getAllBooks() {
 		List<Book> list = bookService.getAllBooks();
-		bookControllerLogger.info("BookControllerLogger: Displaying all books in the catalogue");
+		logger.info("Displaying all books in the catalogue");
 		return new ModelAndView("catalogue", "book", list);
 	}
 	
 	/**
-	 * Adds a Book to the catalogue
+	 * Adds a Book to the catalogue.
 	 *
-	 * @param book: Book object to add to catalogue
-	 * @return A redirect to the Catalogue page
+	 * @param book: Book object to add to catalogue.
+	 * @return A redirect to the Catalogue page.
 	 */
 	@PostMapping("/save")
 	public String addBook(@ModelAttribute Book book) {
+		logger.info("Adding to catalogue: {}", book.toString());
 		this.bookService.saveBook(book);
-		bookControllerLogger.info("BookControllerLogger: Adding a book to the catalogue");
 		return "redirect:/catalogue";
 	}
 	
 	/**
-	 * Adds a Book to the SpecialBook list
+	 * Adds a Book to the SpecialBook list.
 	 * 
-	 * @param id 	The id of the Book to be added to the SpecialBook list
-	 * @return  	A redirection to the view name of the SpecialBook page
+	 * @param id 	The id of the Book to be added to the SpecialBook list.
+	 * @return  	A redirection to the view name of the SpecialBook page.
 	 */
 	@RequestMapping("/addBookToSpecials/{id}")
 	public String addBookToSpecials(@PathVariable("id") long id) {
 		Book book = bookService.getBookById(id);
 		SpecialBook specialBook = new SpecialBook(book.getId(), book.getTitle(), book.getAuthor(), book.getCategory(), book.getYear());
 		specialBookService.saveSpecialBook(specialBook);
-		bookControllerLogger.info("Designating book as Special: {}", book.toString());
+		logger.info("Designating book as Special: {}", book.toString());
 		return "redirect:/specials";
 	}
 	
 	/**
-	 * Retrieves a Book to edit by id
+	 * Retrieves a Book to edit by id.
 	 * 
-	 * @param id Id of the Book to edit
-	 * @param model The model that the Book will be added
-	 * @return The view name of the edit page
+	 * @param id Id of the Book to edit.
+	 * @param model The model that the Book will be added.
+	 * @return The view name of the edit page.
 	 */
 	@RequestMapping("/editBook/{id}")
 	public String editBook(@PathVariable("id") long id, Model model) {
 		Book book = bookService.getBookById(id);
+		logger.info("Editing book: {}", book.toString());
 		model.addAttribute("book", book);
-		bookControllerLogger.info("Editing book: {}}", book.toString());
 		return "edit";
 	}
 	
 	/**
-	 * Deletes a Book from the catalogue by it's id,
-	 * as well as the SpecialBook list if it exists
+	 * Deletes a Book from the catalogue by its id, as well as the SpecialBook list if it exists.
 	 * 
-	 * @param id 	Id of Book to be deleted
-	 * @return 		Redirection to the view name of the catalogue page
+	 * @param id 	Id of Book to be deleted.
+	 * @return 		Redirection to the view name of the catalogue page.
 	 */
 	@RequestMapping("/deleteBook/{id}")
 	public String deleteBook(@PathVariable("id") long id) {
 		Book book = bookService.getBookById(id);
 		specialBookService.deleteSpecialBookById(id);
-		bookService.deleteById(id);
-		bookControllerLogger.info("Deleting from catalogue: {}", book.toString());
+		bookService.deleteBook(id);
+		logger.info("Deleting from catalogue: {}", book.toString());
 		return "redirect:/catalogue";
 	}
 	

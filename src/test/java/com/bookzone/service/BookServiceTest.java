@@ -39,7 +39,7 @@ class BookServiceTest {
     }
 
     @Test
-    void testSave() {
+    void testSaveBook() {
         bookService.saveBook(book1);
         verify(bookRepository, times(1)).save(book1);
     }
@@ -66,10 +66,10 @@ class BookServiceTest {
     }
 
     @Test
-    void testDeleteById() {
+    void testDeleteBook() {
         long id = book1.getId();
         doNothing().when(bookRepository).deleteById(id);
-        bookService.deleteById(id);
+        bookService.deleteBook(id);
         verify(bookRepository, times(1)).deleteById(id);
     }
     

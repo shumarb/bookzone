@@ -1,0 +1,11 @@
+-------------------------------------------------------------------------------
+Test set: com.bookzone.controller.IndexControllerTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.003 s <<< FAILURE! -- in com.bookzone.controller.IndexControllerTest
+com.bookzone.controller.IndexControllerTest.test_showIndex -- Time elapsed: 0.001 s <<< ERROR!
+java.lang.NullPointerException: Cannot invoke "com.bookzone.controller.IndexController.showIndex()" because "this.indexController" is null
+	at com.bookzone.controller.IndexControllerTest.test_showIndex(IndexControllerTest.java:15)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+

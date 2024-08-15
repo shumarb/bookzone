@@ -79,7 +79,7 @@ class BookControllerTest {
 
         assertEquals("redirect:/catalogue", result);
         verify(specialBookService, times(1)).deleteSpecialBookById(id);
-        verify(bookService, times(1)).deleteById(id);
+        verify(bookService, times(1)).deleteBook(id);
     }
     
     @Test
