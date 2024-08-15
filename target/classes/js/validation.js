@@ -4,9 +4,14 @@ function validateForm() {
     var category = document.forms["addBookForm"]["category"].value;
     var year = parseInt(document.forms["addBookForm"]["year"].value);
 
-    if (title === "" || author === "" || category === "") {
-        alert("Title, author, and category cannot be empty");
+    if (title === "" || author === "" || category === "" || isNaN(year) || year <= 0) {
+        if (title === "" || author === "" || category === "") {
+            alert("Please fill up all sections before submission.");
+        } else if (isNaN(year) || year <= 0) {
+            alert("Please enter a valid year");
+        }
         return false;
     }
 
+    return true;
 }
