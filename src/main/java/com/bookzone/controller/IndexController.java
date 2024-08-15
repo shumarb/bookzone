@@ -16,7 +16,7 @@ public class IndexController {
     /**
      * Logger to monitor operational flow and facilitate troubleshooting.
      */
-    private static final Logger indexControllerLogger = LogManager.getLogger(IndexController.class);
+    private static final Logger logger = LogManager.getLogger(IndexController.class);
 
     /**
      * Handles the GET request for the Index page.
@@ -25,7 +25,7 @@ public class IndexController {
      */
     @GetMapping("/")
     public String showIndex() {
-        indexControllerLogger.info("LibrarianControllerLogger: Currently at Index page");
+        logger.info("Currently at Index page.");
         return "index";
     }
 

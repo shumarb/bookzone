@@ -12,8 +12,9 @@
     <a th:href="@{/home}">Home</a>
     <a th:href="@{/add}">Add</a>
     <a th:href="@{/catalogue}">Catalogue</a>
-    <a th:href="@{/specials}">Specials</a>
-    <a th:href="@{/logout}">Logout</a>
+    <form th:action="@{/logout}" method="post">
+        <button type="submit" class="logout">Logout</button>
+    </form>
 </div>
 </body>
 </html>
