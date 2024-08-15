@@ -84,20 +84,6 @@ public class BookController {
 	}
 	
 	/**
-	 * Gets all Special books from the catalogue and adds it to the catalogue for display
-	 * 
-	 * @param model: The model in which the SpecialBook will be added
-	 * @return name of the SpecialBook page
-	 */
-	@GetMapping("/specials")
-	public String getSpecialBooks(Model model) {
-		List<SpecialBook> list = specialBookService.getAllSpecialBooks();
-		model.addAttribute("book", list);
-		bookControllerLogger.info("BookControllerLogger: Displaying all special books in the catalogue");
-		return "specials";
-	}
-	
-	/**
 	 * Adds a Book to the SpecialBook list
 	 * 
 	 * @param id 	The id of the Book to be added to the SpecialBook list
@@ -108,7 +94,7 @@ public class BookController {
 		Book book = bookService.getBookById(id);
 		SpecialBook specialBook = new SpecialBook(book.getId(), book.getTitle(), book.getAuthor(), book.getCategory(), book.getYear());
 		specialBookService.saveSpecialBook(specialBook);
-		bookControllerLogger.info("BookControllerLogger: A book in the catalogue has been selected as Special, and adding this book to Specials");
+		bookControllerLogger.info("Designating book as Special: {}", book.toString());
 		return "redirect:/specials";
 	}
 	
@@ -123,7 +109,7 @@ public class BookController {
 	public String editBook(@PathVariable("id") long id, Model model) {
 		Book book = bookService.getBookById(id);
 		model.addAttribute("book", book);
-		bookControllerLogger.info("BookControllerLogger: Editing a book in the catalogue");
+		bookControllerLogger.info("Editing book: {}}", book.toString());
 		return "edit";
 	}
 	
@@ -136,9 +122,10 @@ public class BookController {
 	 */
 	@RequestMapping("/deleteBook/{id}")
 	public String deleteBook(@PathVariable("id") long id) {
-		this.specialBookService.deleteSpecialBookById(id);
-		this.bookService.deleteById(id);
-		bookControllerLogger.info("BookControllerLogger: Deleting a book from the catalogue. If book is Special, it will also be deleted from Special.");
+		Book book = bookService.getBookById(id);
+		specialBookService.deleteSpecialBookById(id);
+		bookService.deleteById(id);
+		bookControllerLogger.info("Deleting from catalogue: {}", book.toString());
 		return "redirect:/catalogue";
 	}
 	

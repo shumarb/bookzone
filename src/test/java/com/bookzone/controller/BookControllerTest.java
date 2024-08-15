@@ -91,7 +91,6 @@ class BookControllerTest {
         when(bookService.getAllBooks()).thenReturn(bookList);
 
         ModelAndView modelAndView = bookController.getAllBooks();
-
         assertEquals("catalogue", modelAndView.getViewName());
         assertEquals(bookList, modelAndView.getModel().get("book"));
     }
@@ -105,24 +104,7 @@ class BookControllerTest {
         doNothing().when(specialBookService).saveSpecialBook(any(SpecialBook.class));
 
         String result = bookController.addBookToSpecials(id);
-
         assertEquals("redirect:/specials", result);
-    }
-    
-    @Test
-    void testGetSpecialBooks() {
-        List<SpecialBook> specialBookList = new ArrayList<>();
-        specialBookList.add(new SpecialBook());
-        specialBookList.add(new SpecialBook());
-
-        Model model = mock(Model.class);
-
-        when(specialBookService.getAllSpecialBooks()).thenReturn(specialBookList);
-
-        String viewName = bookController.getSpecialBooks(model);
-
-        assertEquals("specials", viewName);
-        verify(model, times(1)).addAttribute("book", specialBookList);
     }
 
 }
