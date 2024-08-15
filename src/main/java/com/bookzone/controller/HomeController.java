@@ -5,9 +5,12 @@
 
 package com.bookzone.controller;
 
+import com.bookzone.model.Person;
+import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -25,8 +28,10 @@ public class HomeController {
 	 * @return name of the Home page
 	 */
 	@GetMapping("/home")
-	public String showHome() {
-		homeControllerLogger.info("Currently at Home page");
+	public String showHome(HttpSession httpSession, Model model) {
+		Person loggedInPerson = (Person) httpSession.getAttribute("loggedInPerson");
+		homeControllerLogger.info("Currently at Home page. Accessed by {}", loggedInPerson.toString());
+		model.addAttribute("loggedInPerson", loggedInPerson);
 		return "home";
 	}
 

@@ -16,10 +16,10 @@
 <body>
 
 <!-- Sidebar -->
-<div th:replace="side-navigation-bar :: sidebar"></div>
+<div th:replace="~{side-navigation-bar :: sidebar}"></div>
 
 <div class="container content my-5">
-    <h1>Welcome to BookZone!</h1>
+    <h1>Welcome, <span th:text="${loggedInPerson.getUsername()}"></span>!</h1>
     <p>BookZone is a platform for librarians to update their library's catalogue. Here are its key features:</p>
     
     <ul>

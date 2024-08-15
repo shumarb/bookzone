@@ -3,6 +3,7 @@ package com.bookzone.controller;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.bookzone.repository.PersonRepository;
+import jakarta.servlet.http.HttpSession;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -33,6 +34,9 @@ class HomeControllerTest {
     private PersonRepository personRepository;
 
     @Mock
+    private HttpSession httpSession;
+
+    @Mock
     private Model model;
     
     @Mock
@@ -51,7 +55,7 @@ class HomeControllerTest {
     
     @Test
     void test_showHome() {
-        String result = homeController.showHome();
+        String result = homeController.showHome(httpSession, model);
         assertEquals("home", result);
     }
 

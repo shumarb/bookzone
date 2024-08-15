@@ -50,9 +50,13 @@ public class LoginController {
      *                  with an error message displayed for unsuccessful login
      */
     @PostMapping("/login")
-    public String login(@RequestParam String email, @RequestParam String password, Model model) {
+    public String login(@RequestParam String email,
+                        @RequestParam String password,
+                        HttpSession httpSession,
+                        Model model) {
         try {
-            loginService.login(email, password);
+            Person loggedInPerson = loginService.login(email, password);
+            httpSession.setAttribute("loggedInPerson", loggedInPerson);
             loginControllerLogger.info("LoginControllerLogger: Successful login. Proceeding to Home page");
             return "redirect:/home";
 

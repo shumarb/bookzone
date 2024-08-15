@@ -48,7 +48,7 @@ public class LoginService {
      * @thrown          UnsuccessfulLoginException If the email address is not found,
      *                  or if the password does not match the stored password for the given email address.
      */
-    public void login(String email, String password) throws UnsuccessfulLoginException {
+    public Person login(String email, String password) throws UnsuccessfulLoginException {
         loginServiceLogger.info("Login attempt | Email address: {}, Password: {}", email, password);
         Optional<Person> personOptional = personRepository.findByEmail(email);
         if (personOptional.isEmpty()) {
@@ -61,6 +61,7 @@ public class LoginService {
             throw new UnsuccessfulLoginException();
         }
         loginServiceLogger.info("Successful login | {}", person.toString());
+        return person;
     }
 
 }
