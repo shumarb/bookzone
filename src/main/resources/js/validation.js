@@ -9,4 +9,9 @@ function validateForm() {
         return false;
     }
 
+    if (year !== "" && year <= 0) {
+        alert("Please enter a valid year");
+        return false;
+    }
+
 }
