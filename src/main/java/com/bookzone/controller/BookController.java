@@ -22,9 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bookzone.model.Book;
-import com.bookzone.model.SpecialBook;
 import com.bookzone.service.BookService;
-import com.bookzone.service.SpecialBookService;
 
 @Controller
 public class BookController {
@@ -39,12 +37,6 @@ public class BookController {
 	 */
 	@Autowired
 	private BookService bookService;
-	
-	/**
-	 * BookService for accessing and managing the SpecialBook entities
-	 */
-	@Autowired
-	private SpecialBookService specialBookService;
 	
 	/**
 	 * Shows the Add Book page.
@@ -84,21 +76,6 @@ public class BookController {
 	}
 	
 	/**
-	 * Adds a Book to the SpecialBook list.
-	 * 
-	 * @param id 	The id of the Book to be added to the SpecialBook list.
-	 * @return  	A redirection to the view name of the SpecialBook page.
-	 */
-	@RequestMapping("/addBookToSpecials/{id}")
-	public String addBookToSpecials(@PathVariable("id") long id) {
-		Book book = bookService.getBookById(id);
-		SpecialBook specialBook = new SpecialBook(book.getId(), book.getTitle(), book.getAuthor(), book.getCategory(), book.getYear());
-		specialBookService.saveSpecialBook(specialBook);
-		logger.info("Designating book as Special: {}", book.toString());
-		return "redirect:/specials";
-	}
-	
-	/**
 	 * Retrieves a Book to edit by id.
 	 * 
 	 * @param id Id of the Book to edit.
@@ -122,7 +99,6 @@ public class BookController {
 	@RequestMapping("/deleteBook/{id}")
 	public String deleteBook(@PathVariable("id") long id) {
 		Book book = bookService.getBookById(id);
-		specialBookService.deleteSpecialBookById(id);
 		bookService.deleteBook(id);
 		logger.info("Deleting from catalogue: {}", book.toString());
 		return "redirect:/catalogue";
