@@ -1,8 +1,4 @@
 /**
- * The ErrorController class handles situations where the url cannot be processed by any controller
- * by loading the Error page
- */
-/**
  * The ErrorController class handles situations where the URL cannot be processed by any controller
  * by loading the Error page.
  */
@@ -20,7 +16,7 @@ public class ErrorPageController implements ErrorController {
 	/**
 	 * Logger used for logging messages of the MyErrorController
 	 */
-	private static final Logger myErrorControllerLogger = LogManager.getLogger(ErrorPageController.class);
+	private static final Logger logger = LogManager.getLogger(ErrorPageController.class);
 	
 	/**
 	 * Handles error requests by returning name of a page
@@ -31,7 +27,7 @@ public class ErrorPageController implements ErrorController {
 	 */
     @RequestMapping("/error")
     public String goesToError() {
-    	myErrorControllerLogger.error("MyErrorControllerLogger: Invalid URL. Currently at error-handler page");
+    	logger.error("Invalid URL. Currently at error page");
         return "error";
     }
 
