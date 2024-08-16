@@ -40,7 +40,7 @@ public class LoginService {
      * Attempts to log in a {@link Librarian} entity based on the specified email address and password.
      * This method checks the provided email address against registered persons.
      * If the email address exists, it then verified that the specified password matches the stored password.
-     * If either check fails, an {@link UnsuccessfulLoginException} is throwns.
+     * If either check fails, an {@link UnsuccessfulLoginException} is thrown.
      *
      * @param email 	The email address of the {@link Person} entity attempting to log in.
      * @param password  The password of the {@link Person} entity attempting to log in.
@@ -52,12 +52,12 @@ public class LoginService {
         loginServiceLogger.info("Login attempt | Email address: {}, Password: {}", email, password);
         Optional<Person> personOptional = personRepository.findByEmail(email);
         if (personOptional.isEmpty()) {
-            loginServiceLogger.error("Unsuccessful login due to incorrect email address.");
+            loginServiceLogger.error("Unsuccessful login due to incorrect email address: {}", email);
             throw new UnsuccessfulLoginException();
         }
         Person person = personOptional.get();
         if (!person.getPassword().equals(password)) {
-            loginServiceLogger.error("Unsuccessful login due to incorrect password.");
+            loginServiceLogger.error("Unsuccessful login due to incorrect password: {}", password);
             throw new UnsuccessfulLoginException();
         }
         loginServiceLogger.info("Successful login | {}", person.toString());
