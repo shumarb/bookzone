@@ -41,8 +41,7 @@ public class RegistrationService {
 																								 	InvalidEmailAddressException,
 																								 	InvalidPasswordException,
 																								 	UnavailableUsernameException,
-																								 	UnavailableEmailAddressException,
-																								 	UnavailablePasswordException {
+																								 	UnavailableEmailAddressException {
 
 		if (!isValidName(name)) {
 			throw new InvalidNameException();
@@ -66,10 +65,6 @@ public class RegistrationService {
 
 		if (!isEmailAddressAvailable(email)) {
 			throw new UnavailableEmailAddressException();
-		}
-
-		if (!isPasswordAvailable(password)) {
-			throw new UnavailablePasswordException();
 		}
 
 		personRepository.save(new Librarian(name, username, email, password));
