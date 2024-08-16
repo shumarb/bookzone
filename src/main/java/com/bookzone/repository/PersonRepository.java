@@ -16,29 +16,26 @@ import com.bookzone.model.Librarian;
 public interface PersonRepository extends JpaRepository<Librarian, Long> {
 	
 	/**
-	 * Retrieves a Librarian based on email.
+	 * Finds a {@link Person} entity by email.
 	 * 
-	 * @param email of the Librarian to retrieve.
-	 * @return an Optional of type Librarian that matches the given email,
-	 * or empty if no Librarian with the given email exists.
+	 * @param email The email address of the {@link Person} entity to retrieve.
+	 * @return 		An Optional containing a {@link Person} entity, or empty if not found.
 	 */
 	Optional<Person> findByEmail(String email);
 
 	/**
-	 * Retrieves a Librarian based on username.
+	 * Finds a {@link Person} entity by email.
 	 *
-	 * @param username of the Librarian to retrieve.
-	 * @return an Optional of type Librarian that matches the given username,
-	 * or empty if no Librarian with the given username exists.
+	 * @param username 	The username of the {@link Person} entity to retrieve.
+	 * @return 			An Optional containing a {@link Person} entity, or empty if not found.
 	 */
 	Optional<Person> findByUsername(String username);
 
 	/**
-	 * Retrieves a Librarian based on password
+	 * Finds a {@link Person} entity by email.
 	 *
-	 * @param password of the Librarian to retrieve
-	 * @return an Optional of type Librarian that matches the given password,
-	 * or empty if no Librarian with the given password exists
+	 * @param password The password of the {@link Person} entity to retrieve.
+	 * @return 			An Optional containing a {@link Person} entity, or empty if not found.
 	 */
 	Optional<Person> findByPassword(String password);
 }
