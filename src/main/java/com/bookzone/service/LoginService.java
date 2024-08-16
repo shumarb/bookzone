@@ -21,7 +21,7 @@ public class LoginService {
     /**
      * Logger to monitor operational flow and facilitate troubleshooting.
      */
-    private static final Logger loginServiceLogger = LogManager.getLogger(LoginService.class);
+    private static final Logger logger = LogManager.getLogger(LoginService.class);
 
     /**
      * Repository for performing CRUD operations on {@link Person} entities.
@@ -49,18 +49,18 @@ public class LoginService {
      *                  or if the password does not match the stored password for the given email address.
      */
     public Person login(String email, String password) throws UnsuccessfulLoginException {
-        loginServiceLogger.info("Login attempt | Email address: {}, Password: {}", email, password);
+        logger.info("Login attempt | Email address: {}, Password: {}", email, password);
         Optional<Person> personOptional = personRepository.findByEmail(email);
         if (personOptional.isEmpty()) {
-            loginServiceLogger.error("Unsuccessful login due to incorrect email address: {}", email);
+            logger.error("Unsuccessful login due to incorrect email address: {}", email);
             throw new UnsuccessfulLoginException();
         }
         Person person = personOptional.get();
         if (!person.getPassword().equals(password)) {
-            loginServiceLogger.error("Unsuccessful login due to incorrect password: {}", password);
+            logger.error("Unsuccessful login due to incorrect password: {}", password);
             throw new UnsuccessfulLoginException();
         }
-        loginServiceLogger.info("Successful login | {}", person.toString());
+        logger.info("Successful login | {}", person.toString());
         return person;
     }
 
