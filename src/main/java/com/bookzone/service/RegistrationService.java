@@ -4,8 +4,6 @@
 
 package com.bookzone.service;
 
-import java.util.Optional;
-
 import com.bookzone.exceptions.*;
 import com.bookzone.model.Person;
 import com.bookzone.repository.PersonRepository;
@@ -22,7 +20,7 @@ public class RegistrationService {
 	/**
 	 * Logger to monitor operational flow and facilitate troubleshooting.
 	 */
-	private static final Logger registrationServiceLogger = LogManager.getLogger(RegistrationService.class);
+	private static final Logger logger = LogManager.getLogger(RegistrationService.class);
 
 	/**
 	 * Repository for performing CRUD operation on {@link Person} entities.
@@ -78,7 +76,7 @@ public class RegistrationService {
 		Person registeredPerson = null;
 		if (personRepository.findByEmail(email).isPresent()) {
 			registeredPerson = personRepository.findByEmail(email).get();
-			registrationServiceLogger.info("Successful registration: {}", registeredPerson.toString());
+			logger.info("Successful registration: {}", registeredPerson.toString());
 		}
 		return registeredPerson;
 	}
@@ -135,10 +133,10 @@ public class RegistrationService {
 	 */
 	public boolean isValidEmailAddress(String email) {
 		if (email.endsWith("@sgbookcollectors.com")) {
-			registrationServiceLogger.info("Valid email address: {}", email);
+			logger.info("Valid email address: {}", email);
 			return true;
 		}
-		registrationServiceLogger.info("Invalid email address: {}", email);
+		logger.info("Invalid email address: {}", email);
 		return false;
 	}
 	
@@ -152,14 +150,14 @@ public class RegistrationService {
 		String[] nameValues = name.split(" ");
 		// 1. Invalid if name has less than 2 words
 		if (nameValues.length < 2) {
-			registrationServiceLogger.error("Name has less than 2 words");
+			logger.error("Name has less than 2 words: {}", name);
 			return false;
 		}
 		
 		// 2. Invalid if each word has less than 3 characters
         for (String nameValue : nameValues) {
             if (nameValue.length() < 3) {
-                registrationServiceLogger.info("At least 1 word in the name has less than 3 characters");
+                logger.info("At least 1 word in the name has less than 3 characters: {}", name);
                 return false;
             }
         }
@@ -169,12 +167,12 @@ public class RegistrationService {
 		// Invalid if there exists at least 1 character that is not a letter
         for (String word : nameValues) {
             if (word != null && !word.matches("[a-zA-Z]+")) {
-                registrationServiceLogger.error("There is at least 1 character detected in the name");
+                logger.error("There is at least 1 character detected in the name: {}", name);
                 return false;
             }
         }
 		
-		registrationServiceLogger.info("Valid name.");
+		logger.info("Valid name: {}", name);
 		return true;
 	}
 	
@@ -190,7 +188,7 @@ public class RegistrationService {
 	 */
 	public boolean isValidPassword(String password) {
 		if (password.length() < 8) {
-			registrationServiceLogger.info("Invalid password: Password length is less than 8 characters.");
+			logger.info("Invalid password: Password length is less than 8 characters: {}", password);
 			return false;
 		}
 
@@ -212,19 +210,19 @@ public class RegistrationService {
 	    }
 
 		if (numberOfUpperCaseLetters < 3) {
-			registrationServiceLogger.info("Invalid password: Password has less than 3 uppercase letters.");
+			logger.info("Invalid password: Password has less than 3 uppercase letters: {}", password);
 			return false;
 
 		} else if (numberOfLowerCaseLetters < 3) {
-			registrationServiceLogger.info("Invalid password: Password has less than 3 lowercase letters.");
+			logger.info("Invalid password: Password has less than 3 lowercase letters: {}", password);
 			return false;
 
 		} else if (numberOfNumbers < 2) {
-			registrationServiceLogger.info("Invalid password: Password has less than 2 numbers.");
+			logger.info("Invalid password: Password has less than 2 numbers: {}", password);
 			return false;
 
 		} else {
-			registrationServiceLogger.info("Valid password: Password has at least 8 characters and contains at least 3 are uppercase letters, at least 3 lowercase letters, and at least 2 numbers");
+			logger.info("Valid password: {}", password);
 			return true;
 		}
 	}
