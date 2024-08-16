@@ -4,6 +4,7 @@
 
 package com.bookzone.service;
 
+import com.bookzone.exceptions.UnsuccessfulLoginException;
 import com.bookzone.model.Librarian;
 import com.bookzone.model.Person;
 import com.bookzone.repository.PersonRepository;
@@ -36,26 +37,31 @@ public class LoginService {
     }
 
     /**
-     * Log the {@link Librarian} entity into the application.
+     * Attempts to log in a {@link Librarian} entity based on the specified email address and password.
+     * This method checks the provided email address against registered persons.
+     * If the email address exists, it then verified that the specified password matches the stored password.
+     * If either check fails, an {@link UnsuccessfulLoginException} is throwns.
      *
-     * @param email 	The email address to check.
-     * @param password  The password to check.
-     * @return True if email and password matches that of an existing {@link Librarian} entity, false otherwise.
+     * @param email 	The email address of the {@link Person} entity attempting to log in.
+     * @param password  The password of the {@link Person} entity attempting to log in.
+     *
+     * @thrown          UnsuccessfulLoginException If the email address is not found,
+     *                  or if the password does not match the stored password for the given email address.
      */
-    public boolean loginLibrarian(String email, String password) {
-        Optional<Librarian> librarianOptional = this.personRepository.findByEmail(email);
-        if (librarianOptional.isPresent()) {
-            Librarian librarian = librarianOptional.get();
-            if (librarian.getPassword().equals(password)) {
-                loginServiceLogger.error("LoginServiceLogger: Email address provided exists and password provided is correct");
-                return true;
-            } else {
-                loginServiceLogger.error("LoginServiceLogger: Email address provided exists but password provided is incorrect");
-            }
-        } else {
-            loginServiceLogger.error("LoginServiceLogger: Email address provided does not exist");
+    public Person login(String email, String password) throws UnsuccessfulLoginException {
+        loginServiceLogger.info("Login attempt | Email address: {}, Password: {}", email, password);
+        Optional<Person> personOptional = personRepository.findByEmail(email);
+        if (personOptional.isEmpty()) {
+            loginServiceLogger.error("Unsuccessful login due to incorrect email address.");
+            throw new UnsuccessfulLoginException();
         }
-        return false;
+        Person person = personOptional.get();
+        if (!person.getPassword().equals(password)) {
+            loginServiceLogger.error("Unsuccessful login due to incorrect password.");
+            throw new UnsuccessfulLoginException();
+        }
+        loginServiceLogger.info("Successful login | {}", person.toString());
+        return person;
     }
 
 }

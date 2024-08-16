@@ -24,7 +24,7 @@ class PersonRepositoryTest {
         String email = "mike.lee@sgbookcollectors.com";
         Person librarian = new Librarian("Mike Lee", "mike_lee", email, "MMM22llla3");
 
-        Optional<Librarian> optionalLibrarian = personRepository.findByEmail(email);
+        Optional<Person> optionalLibrarian = personRepository.findByEmail(email);
 
         verify(personRepository).findByEmail(email);
         assertEquals(librarian, optionalLibrarian.orElse(null));

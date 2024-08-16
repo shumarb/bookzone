@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.bookzone.controllerTest.BookControllerTest
--------------------------------------------------------------------------------
-Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.242 s -- in com.bookzone.controllerTest.BookControllerTest

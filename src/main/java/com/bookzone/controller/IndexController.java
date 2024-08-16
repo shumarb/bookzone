@@ -14,18 +14,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class IndexController {
 
     /**
-     * Logger used for logging messages of the LibrarianController
+     * Logger to monitor operational flow and facilitate troubleshooting.
      */
-    private static final Logger indexControllerLogger = LogManager.getLogger(IndexController.class);
+    private static final Logger logger = LogManager.getLogger(IndexController.class);
 
     /**
-     * Handles the GET request for the Index page
+     * Handles the GET request for the Index page.
      *
      * @return The name of the view for the Index page.
      */
     @GetMapping("/")
     public String showIndex() {
-        indexControllerLogger.info("LibrarianControllerLogger: Currently at Index page");
+        logger.info("Currently at Index page.");
         return "index";
     }
 

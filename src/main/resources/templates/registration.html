@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.com">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,28 +15,30 @@
             <h3>Requirements</h3>
             <ul>
                 <li>Name</li>
-                	<ol>
+                	<ul>
 						<li>At least 2 words.</li>
 						<li>Each word has at least 3 letters.</li>
-					</ol>
+					</ul>
+                <br>
 
-                <li>Name</li>
-                <ol>
-                    <li>At least 2 words.</li>
-                    <li>Each word has at least 3 letters.</li>
-                </ol>
+                <li>Username</li>
+                <ul>
+                    <li>A single word comprising at least 5 characters.</li>
+                </ul>
+                <br>
 
                 <li>Email Address</li>
-                <ol>
+                <ul>
                     <li>Your registered email address with SG Book Collectors.</li>
-                </ol>
-                
+                </ul>
+                <br>
+
                 <li>Password</li>
-                	<ol>
+                	<ul>
 						<li>At least 3 uppercase letters.</li>
 						<li>At least 3 lowercase letters.</li>
 						<li>At least 2 numbers.</li>
-					</ol>
+					</ul>
             </ul>
         </div>
 
@@ -44,7 +46,7 @@
         <p th:if="${error}" class="error-message" th:text="${error}"></p>
 
         <!-- Section to fill up for registration -->
-        <form method="post" action="registration">
+        <form method="post" th:action="@{/registration}">
             <label>
                 <input type="text" name="name" placeholder="Name" required>
             </label>

@@ -15,7 +15,6 @@ import jakarta.persistence.Table;
 @PrimaryKeyJoinColumn(name = "librarian_id")
 public class Librarian extends Person {
 
-
     /**
      * Default constructor required by Hibernate.
      */
@@ -32,7 +31,7 @@ public class Librarian extends Person {
      * @param password  The password of the Librarian.
      */
     public Librarian(String name, String username, String email, String password) {
-        super(name, username, email, password, "Libarian");
+        super(name, username, email, password, "Librarian");
     }
 
 }

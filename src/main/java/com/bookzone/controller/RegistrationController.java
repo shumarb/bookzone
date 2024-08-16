@@ -4,6 +4,13 @@
 
 package com.bookzone.controller;
 
+import com.bookzone.exceptions.InvalidEmailAddressException;
+import com.bookzone.exceptions.InvalidNameException;
+import com.bookzone.exceptions.InvalidPasswordException;
+import com.bookzone.exceptions.InvalidUsernameException;
+import com.bookzone.exceptions.UnavailableUsernameException;
+import com.bookzone.exceptions.UnavailableEmailAddressException;
+import com.bookzone.exceptions.UnavailablePasswordException;
 import com.bookzone.model.Person;
 import com.bookzone.service.RegistrationService;
 import org.apache.logging.log4j.LogManager;
@@ -15,6 +22,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 @Controller
 public class RegistrationController {
@@ -64,34 +72,59 @@ public class RegistrationController {
      *                           or returns the registration page with error messages if validation fails.
      */
     @PostMapping("/registration")
-    public String registerPerson(@RequestParam String name,
-                                 @RequestParam String username,
-                                 @RequestParam String email,
-                                 @RequestParam String password,
-                                 Model model,
-                                 RedirectAttributes redirectAttributes) {
-        if (this.registrationService.isValidName(name) && this.registrationService.isValidEmailAddress(email) && this.registrationService.isValidPassword(password)) {
-            this.registrationService.registerLibrarian(name, username, email, password);
-            registrationControllerLogger.info("RegistrationControllerLogger: Librarian successfully registered, proceeding to Login page");
+    public String registration(@RequestParam String name,
+                               @RequestParam String username,
+                               @RequestParam String email,
+                               @RequestParam String password,
+                               Model model,
+                               RedirectAttributes redirectAttributes) throws InvalidNameException,
+                                                                             InvalidUsernameException,
+                                                                             InvalidEmailAddressException,
+                                                                             InvalidPasswordException,
+                                                                             UnavailableUsernameException,
+                                                                             UnavailableEmailAddressException,
+                                                                             UnavailablePasswordException {
+        registrationControllerLogger.info("Registration attempt | Name: {}, Username: {}, Email Address: {}, Password: {}", name, username, email, password);
+        try {
+            Person registeredPerson = registrationService.registration(name, username, email, password);
+            registrationControllerLogger.info("Successful registration: {}", registeredPerson.toString());
             redirectAttributes.addFlashAttribute("successfulRegistration", "Registration successful. Please log in.");
             return "redirect:/login";
 
-        } else {
+        } catch (InvalidNameException e) {
+            registrationControllerLogger.error("Unsuccessful registration due to invalid name: {}", name);
+            model.addAttribute("error", "Unsuccessful registration due to invalid name");
 
-            if (!this.registrationService.isValidName(name)) {
-                registrationControllerLogger.error("RegistrationControllerLogger: Unsuccessful registration due to invalid name, proceeding to Registration page");
-                model.addAttribute("error", "Unsuccessful registration due to invalid name");
+        } catch (InvalidEmailAddressException e) {
+            registrationControllerLogger.error("Unsuccessful registration due to invalid email address: {}", email);
+            model.addAttribute("error", "Unsuccessful registration due to invalid email address");
 
-            } else if (!this.registrationService.isValidEmailAddress(email)) {
-                registrationControllerLogger.error("RegistrationControllerLogger: Unsuccessful registration due to invalid email address, proceeding to Registration page");
-                model.addAttribute("error", "Unsuccessful registration due to invalid email address");
+        } catch (InvalidPasswordException e) {
+            registrationControllerLogger.error("Unsuccessful registration due to invalid password: {}", password);
+            model.addAttribute("error", "Unsuccessful registration due to invalid password");
 
-            } else if (!this.registrationService.isValidPassword(password)) {
-                registrationControllerLogger.error("RegistrationControllerLogger: Unsuccessful registration due to invalid password, proceeding to Registration page");
-                model.addAttribute("error", "Unsuccessful registration due to invalid password");
-            }
-            return "registration";
+        } catch (InvalidUsernameException e) {
+            registrationControllerLogger.error("Unsuccessful registration due to invalid username, proceeding to Registration page with error message displayed.");
+            model.addAttribute("error", "Unsuccessful registration due to invalid password");
+
+        } catch (UnavailableUsernameException e) {
+            registrationControllerLogger.error("Unsuccessful registration due to unavailable username: {}", username);
+            model.addAttribute("error", "Username entered is unavailable. Please enter another username.");
+
+        } catch (UnavailableEmailAddressException e) {
+            registrationControllerLogger.error("Unsuccessful registration due to unavailable email address: {}", email);
+            model.addAttribute("error", "Email address entered is unavailable. Please enter another email address.");
+
+        } catch (UnavailablePasswordException e) {
+            registrationControllerLogger.error("Unsuccessful registration due to unavailable password: {}", password);
+            model.addAttribute("error", "Password entered is unavailable. Please enter another password.");
+
+        } catch (Exception e) {
+            registrationControllerLogger.error("Unsuccessful registration due to unexpected error, proceeding to Registration page with error message displayed.");
+            model.addAttribute("error", "Unexpected error occurred. Please try again later.");
         }
+
+        return "registration";
     }
 
 }

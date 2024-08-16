@@ -21,18 +21,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bookzone.model.Book;
-import com.bookzone.model.SpecialBook;
 import com.bookzone.service.BookService;
-import com.bookzone.service.SpecialBookService;
 
 @ExtendWith(MockitoExtension.class)
 class BookControllerTest {
 
     @Mock
     BookService bookService;
-
-    @Mock
-    SpecialBookService specialBookService;
 
     @InjectMocks
     BookController bookController;
@@ -49,7 +44,6 @@ class BookControllerTest {
 
     @Test
     void testAddBook() {
-    	
         doNothing().when(bookService).saveBook(book1);
         String result = bookController.addBook(book1);
         verify(bookService, times(1)).saveBook(book1);
@@ -74,12 +68,9 @@ class BookControllerTest {
     @Test
     void testDeleteBook() {
         long id = 1;
-
         String result = bookController.deleteBook(id);
-
         assertEquals("redirect:/catalogue", result);
-        verify(specialBookService, times(1)).deleteSpecialBookById(id);
-        verify(bookService, times(1)).deleteById(id);
+        verify(bookService, times(1)).deleteBook(id);
     }
     
     @Test
@@ -91,38 +82,8 @@ class BookControllerTest {
         when(bookService.getAllBooks()).thenReturn(bookList);
 
         ModelAndView modelAndView = bookController.getAllBooks();
-
         assertEquals("catalogue", modelAndView.getViewName());
         assertEquals(bookList, modelAndView.getModel().get("book"));
-    }
-
-    @Test
-    void testAddBookToSpecials() {
-        long id = 2;
-        Book book = new Book(id, "Title", "Author", "Category", 2022);
-
-        when(bookService.getBookById(id)).thenReturn(book);
-        doNothing().when(specialBookService).saveSpecialBook(any(SpecialBook.class));
-
-        String result = bookController.addBookToSpecials(id);
-
-        assertEquals("redirect:/specials", result);
-    }
-    
-    @Test
-    void testGetSpecialBooks() {
-        List<SpecialBook> specialBookList = new ArrayList<>();
-        specialBookList.add(new SpecialBook());
-        specialBookList.add(new SpecialBook());
-
-        Model model = mock(Model.class);
-
-        when(specialBookService.getAllSpecialBooks()).thenReturn(specialBookList);
-
-        String viewName = bookController.getSpecialBooks(model);
-
-        assertEquals("specials", viewName);
-        verify(model, times(1)).addAttribute("book", specialBookList);
     }
 
 }

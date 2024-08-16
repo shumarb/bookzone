@@ -1,9 +1,9 @@
 # BookZone
 ## Overview
 BookZone is a Book Management System catered to members of the SG Book Collectors club (members with email addresses that 
-end with @sgbookcollectors.com), implemented using the MVC (Model-View-Controller) architectural pattern.
+end with `@sgbookcollectors.com`), implemented using the MVC (Model-View-Controller) architectural pattern.
 
-The application features adding, editing, deleting a book, as well as designating a book as Special.
+The application features `adding`, `editing`, and `deleting` a book.
 
 ## Prerequisites
 - Java 17.
@@ -20,6 +20,7 @@ The application features adding, editing, deleting a book, as well as designatin
     - Line 5: Set `spring.datasource.url=jdbc:mysql://localhost:3306/name-of-your-schema`.
     - Line 6: Set `spring.datasource.username=name-of-your-mysql-username`.
     - Line 7: Set `spring.datasource.username=name-of-your-mysql-password`.
+6. Run `git pull origin main` to ensure you have the latest version of the repository.
 
 ## Instructions
 1. Right-click the `BookzoneApplication` class file (Location: `src/main/java/com/example/WorkPortal/BookzoneApplication.java`).
@@ -33,10 +34,10 @@ The application features adding, editing, deleting a book, as well as designatin
 4. Enter `localhost:9001/` in your browser after seeing the message `Started BookzoneApplication` in the `console`.
 5. Explore the application.
 6. Explore data in theMySQL Workbench:
-   - Expand the schema to view `Books`, `Librarians`, and `Specials` tables.
+   - Expand the schema to view `Books (denoted as books)`, `Librarians (denoted as librarians)`, and `Persons (denoted as persons)` tables.
    - `Books` table: Contains `id`, `author`, `category`, `title`, `year`.
-   - `Specials` table: Contains the same attributes as Books but for Special books.
-   - `Librarians` table: Contains `id`, `name`, `email`, and `password`.
+   - `Person` table: Contains `id`, `name`, `email`, and `password`.
+   - `Library` table: Contains `id`.
 
 ## Tech Stack
 - Programming: Java.
