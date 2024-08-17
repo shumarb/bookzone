@@ -1,7 +1,5 @@
 /**
- * Handles requests for adding, editing, and deleting books.
- * 
- * @author Sheikh Umar
+ * Controller for handling requests for adding, editing, and deleting {@link Book} entities.
  */
 
 package com.bookzone.controller;

@@ -1,6 +1,5 @@
 /**
- * Controller class that handles requests related to the Home page.
- *
+ * Controller class that handles requests for the Home page.
  */
 
 package com.bookzone.controller;

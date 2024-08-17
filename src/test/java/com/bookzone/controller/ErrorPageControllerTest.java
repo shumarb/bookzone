@@ -20,14 +20,14 @@ class ErrorPageControllerTest {
 	}
 
 	@Test
-	void testGoesToErrorPage() {
-		String result = errorController.goesToError();
+	void testShowErrorPage() {
+		String result = errorController.showError();
 		assertEquals(result, "error");
 	}
 	
 	@Test
 	void testDoesNotGoToOtherPage() {
-		String result = errorController.goesToError();
+		String result = errorController.showError();
 		assertNotEquals(result, "catalogue");
 	}
 
