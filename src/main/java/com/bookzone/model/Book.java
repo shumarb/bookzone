@@ -1,6 +1,6 @@
 /**
  * Represents a book entity with attributes such as title, author, category, and year of publication.
- * Maps to the "books" table in the database.
+ * Maps to the "catalogue" table in the database.
  */
 
 package com.bookzone.model;
@@ -12,12 +12,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "books")
+@Table(name = "catalogue")
 public class Book {
 
 	/***
-	 * A book's identification number.
-	 * Every book will have a unique identification number
+	 * Unique identification number of a book.
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,7 +38,7 @@ public class Book {
 	private String category;
 	
 	/**
-	 * Author of the book.
+	 * Year of the book.
 	 */
 	private int year;
 
