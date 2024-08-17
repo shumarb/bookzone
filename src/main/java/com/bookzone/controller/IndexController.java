@@ -1,6 +1,5 @@
 /**
- * Controller class that handles requests related to the Index page.
- *
+ * Controller class that handles requests for the Index page.
  */
 
 package com.bookzone.controller;

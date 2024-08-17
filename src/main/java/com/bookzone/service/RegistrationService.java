@@ -27,7 +27,15 @@ public class RegistrationService {
 	 */
 	@Autowired
 	private PersonRepository personRepository;
-	
+
+	/**
+	 * Constructs a {@code RegistrationService} with the specified {@code PersonRepository}.
+	 */
+	@Autowired
+	public RegistrationService(PersonRepository personRepository) {
+		this.personRepository = personRepository;
+	}
+
 	/**
 	 * Registers a {@link Librarian} entity.
 	 *
@@ -83,17 +91,13 @@ public class RegistrationService {
 	 * @return True if the email address is not unregistered, false otherwise.
 	 */
 	private boolean isEmailAddressAvailable(String email) {
-		return personRepository.findByEmail(email).isEmpty();
-	}
-
-	/**
-	 * Checks if a password is available for registration.
-	 *
-	 * @param password The password to check.
-	 * @return True if the password is not unregistered, false otherwise.
-	 */
-	private boolean isPasswordAvailable(String password) {
-		return personRepository.findByPassword(password).isEmpty();
+		boolean result = personRepository.findByEmail(email).isEmpty();
+		if (result) {
+			logger.info("Email address is available for registration: {}", email);
+		} else {
+			logger.info("Email address is unavailable for registration: {}", email);
+		}
+		return result;
 	}
 
 	/**

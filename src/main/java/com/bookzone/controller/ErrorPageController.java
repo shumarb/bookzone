@@ -1,7 +1,7 @@
 /**
- * The ErrorController class handles situations where the URL cannot be processed by any controller
- * by loading the Error page.
+ * Controller for handling requests for invalid URL access.
  */
+
 package com.bookzone.controller;
 
 import org.apache.logging.log4j.LogManager;
@@ -14,19 +14,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ErrorPageController implements ErrorController {
 
 	/**
-	 * Logger used for logging messages of the MyErrorController
+	 * Logger to monitor operational flow and facilitate troubleshooting.
 	 */
 	private static final Logger logger = LogManager.getLogger(ErrorPageController.class);
 	
 	/**
-	 * Handles error requests by returning name of a page
-	 * displaying an error message and links for login and registration
+	 * Handles GET requests to the Error page.
 	 * 
-	 * @return name of a page that displays an error message
-	 * and links for login and registration
+	 * @return View name of the Error page.
 	 */
     @RequestMapping("/error")
-    public String goesToError() {
+    public String showError() {
     	logger.error("Invalid URL. Currently at error page");
         return "error";
     }

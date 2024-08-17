@@ -10,8 +10,8 @@
 <div th:fragment="sidebar" class="sidebar">
     <p class="navbar-brand">BookZone</p>
     <a th:href="@{/home}">Home</a>
-    <a th:href="@{/add}">Add</a>
     <a th:href="@{/catalogue}">Catalogue</a>
+    <a th:href="@{/add}">Add</a>
     <form th:action="@{/logout}" method="post">
         <button type="submit" class="logout">Logout</button>
     </form>

@@ -1,5 +1,5 @@
 /**
- * Controller class that handles registration-related requests.
+ * Controller class that handles requests for the Registration page.
  */
 
 package com.bookzone.controller;
@@ -52,7 +52,7 @@ public class RegistrationController {
      * @return A string indicating the view name of the Registration page.
      */
     @GetMapping("/registration")
-    public String goToRegistration() {
+    public String showRegistration() {
         logger.info("Currently at Registration page");
         return "registration";
     }

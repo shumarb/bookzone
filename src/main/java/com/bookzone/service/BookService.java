@@ -1,5 +1,5 @@
 /**
- * BookService is a Service class to manage the Book entity
+ * Service class for managing {@link Book} entities.
  */
 
 package com.bookzone.service;
@@ -23,36 +23,36 @@ public class BookService {
 	private static final Logger logger = LogManager.getLogger(BookService.class);
 
 	/**
-	 * BookRepository to manage the Book entity
+	 * {@link BookRepository} for managing {@link Book} entities.
 	 */
 	@Autowired
 	private BookRepository bookRepository;
 	
 	/**
-	 * Saves a Book to the catalogue.
+	 * Saves a {@link Book} to the catalogue.
 	 * 
-	 * @param book to saveBook to the catalogue.
+	 * @param book The {@link Book} to save.
 	 */
 	public void saveBook(Book book) {
 		bookRepository.save(book);
-		logger.info("Added to catalogue: {}", book);
+		logger.info("Adding: {}", book);
 	}
 	
 	/**
-	 * Retrieves all Books in the catalogue.
+	 * Retrieves all {@link Book} entities in the catalogue.
 	 * 
-	 * @return list of all Books in the catalogue.
+	 * @return A {@link List} of all {@link Book} entities.
 	 */
 	public List<Book> getAllBooks() {
-		logger.info("Retrieving all books saved in the catalogue.");
+		logger.info("Retrieving all books in the catalogue.");
 		return bookRepository.findAll();
 	}
 	
 	/**
-	 * Retrieves a Book from a catalogue by its id.
+	 * Retrieves a {@link Book} by its identifier.
 	 * 
-	 * @param id The identification number of a book.
-	 * @return a Book with the given id, null otherwise.
+	 * @param 	id The identifier of the {@link Book}.
+	 * @return 	The {@link Book} with the given identifier, or null if not found.
 	 */
 	public Book getBookById(long id) {
 		Book book = null;
@@ -64,9 +64,9 @@ public class BookService {
 	}
 	
 	/**
-	 * Deletes a book by its id.
+	 * Deletes a {@link Book} by its identifier.
 	 * 
-	 * @param id of the book to delete from the catalogue.
+	 * @param id The identifier of the {@link Book}.
 	 */
 	public void deleteBook(long id) {
 		Book book;

@@ -1,5 +1,6 @@
 /**
  * Parent class for entities sharing common attributes.
+ * Maps to the "person" table in the database with a joined inheritance strategy.
  */
 
 package com.bookzone.model;
@@ -12,40 +13,36 @@ import jakarta.persistence.*;
 public class Person {
 
     /**
-     * Identification number of a {@link Person} entity.
+     * Unique identification number of a {@link Person} entity.
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected long id;
 
     /**
-     * Name of a {@link Person} entity.
+     * Name of a Person.
      */
     protected String name;
 
     /**
-     * Username of a {@link Person} entity.
+     * Unique username of a Person.
      */
     @Column(unique = true)
     protected String username;
 
     /**
-     * Email address of a {@link Person} entity.
-     * This attribute must be unique across all the {@link Person} entities.
+     * Unique email address of a Person.
      */
     @Column(unique = true)
     protected String email;
 
     /**
-     * Password of a {@link Person} entity.
-     * This attribute must be unique across all the {@link Person} entities.
+     * Password of a Person.
      */
-    @Column(unique = true)
     protected String password;
 
     /**
-     * Role of a {@link Person} entity.
-     * This attribute must be unique across all the {@link Person} entities.
+     * Role of a Person.
      */
     protected String role;
 
@@ -57,13 +54,13 @@ public class Person {
     }
 
     /**
-     * Constructs a new {@link Person} entity with each attribute assigned to its corresponding provided values.
+     * Constructs a new {@link Person} entity with the specified attributes.
      *
-     * @param name          The name of the Person entity.
-     * @param username      The username of the Person entity.
-     * @param email         The email of the Person entity.
-     * @param password      The password of the Person entity.
-     * @param role          The role of the Person entity.
+     * @param name          The name of a Person.
+     * @param username      The username of a Person.
+     * @param email         The email of a Person.
+     * @param password      The password of a Person.
+     * @param role          The role of a Person.
      */
     public Person(String name, String username, String email, String password, String role) {
         this.name = name;

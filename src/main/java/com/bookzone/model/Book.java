@@ -1,10 +1,8 @@
-/***
- * This class illustrates the attributes and behaviours of a Book object,
- * as well as the annotations of Spring used to map entities in the  database.
- * Every book object is stored in a table called catalogue.
- * 
- * @author Sheikh Umar
+/**
+ * Represents a book entity with attributes such as title, author, category, and year of publication.
+ * Maps to the "catalogue" table in the database.
  */
+
 package com.bookzone.model;
 
 import jakarta.persistence.Entity;
@@ -14,36 +12,33 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "books")
+@Table(name = "catalogue")
 public class Book {
 
 	/***
-	 * A book's identification number.
-	 * Every book will have a unique identification number
+	 * Unique identifier of a book.
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
 	/**
-	 * A book's title.
+	 * Title of the book.
 	 */
 	private String title;
 	
 	/**
-	 * A book's author.
+	 * Author of the book.
 	 */
 	private String author;
 	
 	/**
-	 * A book's category
-	 * 
-	 * Example: Fantasy.
+	 * Category of the book.
 	 */
 	private String category;
 	
 	/**
-	 * A book's year of publication.
+	 * Year of the book.
 	 */
 	private int year;
 
@@ -73,7 +68,7 @@ public class Book {
 	/**
 	 * Constructs a new {@link Book} entity with the specified details.
 	 *
-	 * @param id		The identification number of the Book.
+	 * @param id		The identifier of the Book.
 	 * @param title		The title of the Book.
 	 * @param author	The author of the Book.
 	 * @param category	The category of the Book.

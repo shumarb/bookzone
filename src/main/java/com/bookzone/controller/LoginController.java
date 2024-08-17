@@ -1,5 +1,5 @@
 /**
- * Controller class that handles login-related requests.
+ * Controller class that handles requests for the Login page.
  */
 
 package com.bookzone.controller;
@@ -31,11 +31,10 @@ public class LoginController {
     /**
      * Handles GET mapping related to displaying the Login page.
      *
-     * @param   httpSession The HttpSession object.
      * @return  The name of view for the Login page.
      */
     @GetMapping("/login")
-    public String showLogin(HttpSession httpSession) {
+    public String showLogin() {
         logger.info("Currently at Login page.");
         return "login";
     }
@@ -48,7 +47,7 @@ public class LoginController {
      * @param httpSession   The HttpSession to set the logged-in user.
      * @param model         The model where attributes can be added for the view
      * @return              Redirection to the Home page for a successful login, or login page
-     *                      with an message explaining reason for unsuccessful login.
+     *                      with a message explaining reason for unsuccessful login.
      */
     @PostMapping("/login")
     public String login(@RequestParam String email,

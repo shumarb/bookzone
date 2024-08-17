@@ -16,7 +16,7 @@ import com.bookzone.model.Librarian;
 public interface PersonRepository extends JpaRepository<Librarian, Long> {
 	
 	/**
-	 * Finds a {@link Person} entity by email.
+	 * Finds a {@link Person} entity by its email address.
 	 * 
 	 * @param email The email address of the {@link Person} entity to retrieve.
 	 * @return 		An Optional containing a {@link Person} entity, or empty if not found.
@@ -24,18 +24,11 @@ public interface PersonRepository extends JpaRepository<Librarian, Long> {
 	Optional<Person> findByEmail(String email);
 
 	/**
-	 * Finds a {@link Person} entity by email.
+	 * Finds a {@link Person} entity by its username.
 	 *
 	 * @param username 	The username of the {@link Person} entity to retrieve.
 	 * @return 			An Optional containing a {@link Person} entity, or empty if not found.
 	 */
 	Optional<Person> findByUsername(String username);
 
-	/**
-	 * Finds a {@link Person} entity by email.
-	 *
-	 * @param password The password of the {@link Person} entity to retrieve.
-	 * @return 			An Optional containing a {@link Person} entity, or empty if not found.
-	 */
-	Optional<Person> findByPassword(String password);
 }
