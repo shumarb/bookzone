@@ -1,7 +1,5 @@
 /**
- * {@link Librarian} class extending from the {@link Person} class.
- * 
- * @author Sheikh Umar
+ * Represents a librarian, extending from the {@link Person} class.
  */
 
 package com.bookzone.model;
@@ -25,10 +23,10 @@ public class Librarian extends Person {
     /**
      * Contracts a {@link Librarian} with the specified details.
      *
-     * @param name      The name of the Librarian.
-     * @param username  The username of the Librarian.
-     * @param email     The email address of the Librarian.
-     * @param password  The password of the Librarian.
+     * @param name      The name of the librarian.
+     * @param username  The username of the librarian.
+     * @param email     The email address of the librarian.
+     * @param password  The password of the librarian.
      */
     public Librarian(String name, String username, String email, String password) {
         super(name, username, email, password, "Librarian");
