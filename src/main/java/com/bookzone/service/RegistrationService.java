@@ -27,7 +27,15 @@ public class RegistrationService {
 	 */
 	@Autowired
 	private PersonRepository personRepository;
-	
+
+	/**
+	 * Constructs a {@code RegistrationService} with the specified {@code PersonRepository}.
+	 */
+	@Autowired
+	public RegistrationService(PersonRepository personRepository) {
+		this.personRepository = personRepository;
+	}
+
 	/**
 	 * Registers a {@link Librarian} entity.
 	 *

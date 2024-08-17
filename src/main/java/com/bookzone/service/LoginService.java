@@ -1,5 +1,5 @@
 /**
- * Service class that handles login-related requests.
+ * Service class for handling login of {@link Person} entities.
  */
 
 package com.bookzone.service;
@@ -29,7 +29,7 @@ public class LoginService {
     private final PersonRepository personRepository;
 
     /**
-     * Constructs a {@code LoginController} with the specified {@code PersonRepository}
+     * Constructs a {@code LoginService} with the specified {@code PersonRepository}.
      */
     @Autowired
     public LoginService(PersonRepository personRepository) {
@@ -37,16 +37,12 @@ public class LoginService {
     }
 
     /**
-     * Attempts to log in a {@link Librarian} entity based on the specified email address and password.
-     * This method checks the provided email address against registered persons.
-     * If the email address exists, it then verified that the specified password matches the stored password.
-     * If either check fails, an {@link UnsuccessfulLoginException} is thrown.
+     * Authenticates a {@link Librarian} entity based on the specified email address and password.
      *
      * @param email 	The email address of the {@link Person} entity attempting to log in.
      * @param password  The password of the {@link Person} entity attempting to log in.
      *
-     * @thrown          UnsuccessfulLoginException If the email address is not found,
-     *                  or if the password does not match the stored password for the given email address.
+     * @thrown          UnsuccessfulLoginException If the email address is not found or incorrect password.
      */
     public Person login(String email, String password) throws UnsuccessfulLoginException {
         logger.info("Login attempt | Email address: {}, Password: {}", email, password);
