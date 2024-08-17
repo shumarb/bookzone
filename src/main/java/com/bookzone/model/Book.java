@@ -16,7 +16,7 @@ import jakarta.persistence.Table;
 public class Book {
 
 	/***
-	 * Unique identification number of a book.
+	 * Unique identifier of a book.
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -68,7 +68,7 @@ public class Book {
 	/**
 	 * Constructs a new {@link Book} entity with the specified details.
 	 *
-	 * @param id		The identification number of the Book.
+	 * @param id		The identifier of the Book.
 	 * @param title		The title of the Book.
 	 * @param author	The author of the Book.
 	 * @param category	The category of the Book.
