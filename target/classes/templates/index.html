@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.com">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/css/index.css">
+    <title>BookZone</title>
+</head>
+<body>
+    <div class="container">
+        <h2>BookZone</h2>
+
+        <!-- Message for successful logout -->
+        <div th:if="successfulLogout" class="successful-logout">
+            <p th:text="${successfulLogout}"></p>
+        </div>
+
+        <a th:href="@{/login}">Login</a>
+        <a th:href="@{/registration}">Register</a>
+    </div>
+</body>
+</html>

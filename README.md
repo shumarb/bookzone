@@ -34,8 +34,8 @@ The application features `adding`, `editing`, and `deleting` a book.
 5. Enter `localhost:9001/` in your browser after seeing the message `Started BookzoneApplication` in the `console`.
 6. Explore the application.
 7. Explore data in theMySQL Workbench:
-   - Expand the schema to view `Books (denoted as books)`, `Librarians (denoted as librarians)`, and `Persons (denoted as persons)` tables.
-   - `Books` table: Contains `id`, `author`, `category`, `title`, `year`.
+   - Expand the schema to view `Books (denoted as catalogue)`, `Librarians (denoted as librarians)`, and `Persons (denoted as persons)` tables.
+   - `Catalogue` table: Contains `id`, `author`, `category`, `title`, `year`.
    - `Person` table: Contains `id`, `name`, `email`, and `password`.
    - `Library` table: Contains `id`.
 
