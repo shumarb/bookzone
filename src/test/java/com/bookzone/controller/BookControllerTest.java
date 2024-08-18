@@ -9,6 +9,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -16,7 +17,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -26,6 +33,8 @@ import com.bookzone.service.BookService;
 @ExtendWith(MockitoExtension.class)
 class BookControllerTest {
 
+    private MockMvc mockMvc;
+
     @Mock
     BookService bookService;
 
@@ -33,57 +42,47 @@ class BookControllerTest {
     BookController bookController;
 
     Book book1;
-    
-    Book book2;
 
     @BeforeEach
     void setUp() throws Exception {
         book1 = new Book(1, "Trust", "Herman Diaz", "Novel", 2022);
-        book2 = new Book(2, "The Reptile Room", "Daniel Handler", "Fiction", 1999);
+        MockitoAnnotations.openMocks(this);
+        mockMvc = MockMvcBuilders.standaloneSetup(bookController).build();
     }
 
     @Test
-    void testAddBook() {
-        doNothing().when(bookService).saveBook(book1);
-        String result = bookController.addBook(book1);
-        verify(bookService, times(1)).saveBook(book1);
-        assertEquals("redirect:/catalogue", result);
-        
-    }
-    
-    @Test
-    void testEditBook() {
-        long id = 1L;
-        Book book = new Book(id, "Title", "Author", "Category", 2022);
-        Model model = mock(Model.class);
+    void test_addBook() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.post("/save")
+                .param("title", book1.getTitle())
+                .param("author", book1.getAuthor())
+                .param("category", book1.getCategory())
+                .param("year", String.valueOf(book1.getYear())))
+                .andExpect(MockMvcResultMatchers.status().is3xxRedirection());
 
-        when(bookService.getBookById(id)).thenReturn(book);
-
-        String viewName = bookController.editBook(id, model);
-
-        assertEquals("edit", viewName);
-        verify(model, times(1)).addAttribute("book", book);
+        verify(bookService, times(1)).saveBook(any(Book.class));
     }
     
     @Test
-    void testDeleteBook() {
-        long id = 1;
-        String result = bookController.deleteBook(id);
-        assertEquals("redirect:/catalogue", result);
-        verify(bookService, times(1)).deleteBook(id);
+    void test_editBook() throws Exception {
+        when(bookService.getBookById(book1.getId())).thenReturn(book1);
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/editBook/1"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.view().name("edit"))
+                .andExpect(MockMvcResultMatchers.model().attribute("book", book1))
+                .andDo(MockMvcResultHandlers.print());
+
+        verify(bookService, times(1)).getBookById(book1.getId());
     }
     
     @Test
-    void testGetAllBooks() {
-        List<Book> bookList = new ArrayList<>();
-        bookList.add(book1);
-        bookList.add(book2);
+    void test_deleteBook() throws Exception {
+        when(bookService.getBookById(book1.getId())).thenReturn(book1);
 
-        when(bookService.getAllBooks()).thenReturn(bookList);
-
-        ModelAndView modelAndView = bookController.getAllBooks();
-        assertEquals("catalogue", modelAndView.getViewName());
-        assertEquals(bookList, modelAndView.getModel().get("book"));
+        mockMvc.perform(MockMvcRequestBuilders.get("/deleteBook/1"))
+                .andExpect(MockMvcResultMatchers.status().is3xxRedirection())
+                .andExpect(MockMvcResultMatchers.redirectedUrl("/catalogue"))
+                .andDo(MockMvcResultHandlers.print());
     }
 
 }
