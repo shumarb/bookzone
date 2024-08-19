@@ -91,19 +91,19 @@ public class RegistrationController {
 
         } catch (InvalidNameException e) {
             logger.error("Unsuccessful registration due to invalid name: {}", name);
-            model.addAttribute("error", "Unsuccessful registration due to invalid name");
+            model.addAttribute("error", "Unsuccessful registration due to invalid name.");
 
         } catch (InvalidEmailAddressException e) {
             logger.error("Unsuccessful registration due to invalid email address: {}", email);
-            model.addAttribute("error", "Unsuccessful registration due to invalid email address");
+            model.addAttribute("error", "Unsuccessful registration due to invalid email address.");
 
         } catch (InvalidPasswordException e) {
             logger.error("Unsuccessful registration due to invalid password: {}", password);
-            model.addAttribute("error", "Unsuccessful registration due to invalid password");
+            model.addAttribute("error", "Unsuccessful registration due to invalid password.");
 
         } catch (InvalidUsernameException e) {
             logger.error("Unsuccessful registration due to invalid username, proceeding to Registration page with error message displayed.");
-            model.addAttribute("error", "Unsuccessful registration due to invalid password");
+            model.addAttribute("error", "Unsuccessful registration due to invalid password.");
 
         } catch (UnavailableUsernameException e) {
             logger.error("Unsuccessful registration due to unavailable username: {}", username);
