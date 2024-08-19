@@ -85,6 +85,7 @@ class RegistrationControllerTest {
         // Act
         String viewName = registrationController.registration("john", validUsername, validEmail, validPassword, model, redirectAttributes);
         assertEquals(viewName, "registration");
+        assertThrows(InvalidNameException.class, () -> registrationService.registration("john", validUsername, validEmail, validPassword));
         verify(model).addAttribute("error", "Unsuccessful registration due to invalid name.");
         verifyNoInteractions(redirectAttributes);
     }
