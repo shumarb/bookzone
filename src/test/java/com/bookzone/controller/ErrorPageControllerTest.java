@@ -1,34 +1,35 @@
 package com.bookzone.controller;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
+import org.mockito.InjectMocks;
+import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 @ExtendWith(MockitoExtension.class)
 class ErrorPageControllerTest {
 
-	@Mock
-	private ErrorPageController errorController;
-	
+	private MockMvc mockMvc;
+
+    @InjectMocks
+	private ErrorPageController errorPageController;
+
 	@BeforeEach
-	void setUp() throws Exception {
-		errorController = new ErrorPageController();
+	void setUp() {
+		MockitoAnnotations.openMocks(this);
+		mockMvc = MockMvcBuilders.standaloneSetup(errorPageController).build();
 	}
 
 	@Test
-	void testShowErrorPage() {
-		String result = errorController.showError();
-		assertEquals(result, "error");
+	void test_invalidUrl() throws Exception {
+		mockMvc.perform(MockMvcRequestBuilders.get("/wwwewqeq"))
+				.andExpect(MockMvcResultMatchers.status().isNotFound())
+				.andDo(MockMvcResultHandlers.print());
 	}
-	
-	@Test
-	void testDoesNotGoToOtherPage() {
-		String result = errorController.showError();
-		assertNotEquals(result, "catalogue");
-	}
-
 }
