@@ -107,7 +107,13 @@ public class RegistrationService {
 	 * @return True is username is unregistered, false otherwise.
 	 */
 	private boolean isUsernameAvailable(String username) {
-		return personRepository.findByUsername(username).isEmpty();
+		boolean result = personRepository.findByUsername(username).isEmpty();
+		if (result) {
+			logger.info("Available username: {}", username);
+		} else {
+			logger.error("Unavailable username: {}", username);
+		}
+		return result;
 	}
 
 	/**

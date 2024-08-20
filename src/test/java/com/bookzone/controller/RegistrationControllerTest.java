@@ -53,11 +53,11 @@ class RegistrationControllerTest {
     }
 
     @Test
-    void test_registrationSuccess() throws InvalidNameException,
+    void test_registrationSuccess() throws  InvalidNameException,
                                             InvalidEmailAddressException,
-                                            UnavailableEmailAddressException,
                                             InvalidPasswordException,
                                             InvalidUsernameException,
+                                            UnavailableEmailAddressException,
                                             UnavailableUsernameException {
         // Arrange
         Person librarian = new Librarian(validName, validUsername, validEmail, validPassword);
@@ -75,9 +75,9 @@ class RegistrationControllerTest {
     @Test
     void test_registrationFailure_invalidName() throws  InvalidNameException,
                                                         InvalidEmailAddressException,
-                                                        UnavailableEmailAddressException,
                                                         InvalidPasswordException,
                                                         InvalidUsernameException,
+                                                        UnavailableEmailAddressException,
                                                         UnavailableUsernameException {
         // Arrange
         Person librarian = new Librarian("john", validUsername, validEmail, validPassword);
@@ -96,9 +96,9 @@ class RegistrationControllerTest {
     @Test
     void test_registrationFailure_invalidUsername() throws  InvalidNameException,
                                                             InvalidEmailAddressException,
-                                                            UnavailableEmailAddressException,
                                                             InvalidPasswordException,
                                                             InvalidUsernameException,
+                                                            UnavailableEmailAddressException,
                                                             UnavailableUsernameException {
         // Arrange
         Person librarian = new Librarian(validName, "ada", validEmail, validPassword);
@@ -117,9 +117,9 @@ class RegistrationControllerTest {
     @Test
     void test_registrationFailure_invalidEmailAddress() throws  InvalidNameException,
                                                                 InvalidEmailAddressException,
-                                                                UnavailableEmailAddressException,
                                                                 InvalidPasswordException,
                                                                 InvalidUsernameException,
+                                                                UnavailableEmailAddressException,
                                                                 UnavailableUsernameException {
         // Arrange
         Person librarian = new Librarian(validName, validUsername, "ada", validPassword);
@@ -138,9 +138,9 @@ class RegistrationControllerTest {
     @Test
     void test_registrationFailure_invalidPassword() throws  InvalidNameException,
                                                             InvalidEmailAddressException,
-                                                            UnavailableEmailAddressException,
                                                             InvalidPasswordException,
                                                             InvalidUsernameException,
+                                                            UnavailableEmailAddressException,
                                                             UnavailableUsernameException {
         // Arrange
         Person librarian = new Librarian(validName, validUsername, validEmail, "ada");
@@ -153,6 +153,25 @@ class RegistrationControllerTest {
         assertEquals("registration", viewName);
         assertThrows(InvalidPasswordException.class, () -> registrationService.registration(validName, validUsername, validEmail, "ada"));
         verify(model).addAttribute("error", "Unsuccessful registration due to invalid password.");
+        verifyNoInteractions(redirectAttributes);
+    }
+
+    @Test
+    void test_registrationFailure_unavailableUsername() throws  InvalidNameException,
+                                                                InvalidEmailAddressException,
+                                                                InvalidPasswordException,
+                                                                InvalidUsernameException,
+                                                                UnavailableEmailAddressException,
+                                                                UnavailableUsernameException {
+        // Arrange
+        when(registrationService.registration(validName, validUsername, validEmail, validPassword)).thenThrow(UnavailableUsernameException.class);
+
+        // Act
+        viewName = registrationController.registration(validName, validUsername, validEmail, validPassword, model, redirectAttributes);
+
+        // Assert
+        assertEquals("registration", viewName);
+        verify(model).addAttribute("error", "Username entered is unavailable. Please enter another username.");
         verifyNoInteractions(redirectAttributes);
     }
 
