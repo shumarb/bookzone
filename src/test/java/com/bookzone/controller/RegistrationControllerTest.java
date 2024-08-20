@@ -113,4 +113,25 @@ class RegistrationControllerTest {
         verifyNoInteractions(redirectAttributes);
     }
 
+    void test_registration_failure_invalidEmailAddress() throws InvalidNameException,
+                                                                InvalidEmailAddressException,
+                                                                UnavailableEmailAddressException,
+                                                                InvalidPasswordException,
+                                                                InvalidUsernameException,
+                                                                UnavailableUsernameException {
+
+        // Arrange
+        Person librarian = new Librarian(validName, validUsername, "ada", validPassword);
+        when(registrationService.registration(validName, validUsername, "ada", validPassword)).thenThrow(InvalidEmailAddressException.class);
+
+        // Act
+        String viewName = registrationController.registration(validName, validUsername, "ada", validPassword, model, redirectAttributes);
+
+        // Assert
+        assertEquals("registration", viewName);
+        assertThrows(InvalidEmailAddressException.class, () -> registrationService.registration(validName, validUsername, "ada", validPassword));
+        verify(model).addAttribute("error", "Unsuccessful registration due to invalid email address.");
+        verifyNoInteractions(redirectAttributes);
+    }
+
 }
