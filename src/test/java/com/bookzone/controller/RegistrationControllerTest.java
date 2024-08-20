@@ -52,7 +52,7 @@ class RegistrationControllerTest {
     }
 
     @Test
-    void test_registration_success() throws InvalidNameException,
+    void test_registrationSuccess() throws InvalidNameException,
                                             InvalidEmailAddressException,
                                             UnavailableEmailAddressException,
                                             InvalidPasswordException,
@@ -72,7 +72,7 @@ class RegistrationControllerTest {
     }
 
     @Test
-    void test_registration_failure_invalidName() throws InvalidNameException,
+    void test_registrationFailure_invalidName() throws InvalidNameException,
                                                         InvalidEmailAddressException,
                                                         UnavailableEmailAddressException,
                                                         InvalidPasswordException,
@@ -93,7 +93,7 @@ class RegistrationControllerTest {
     }
 
     @Test
-    void test_registration_failure_invalidUsername() throws InvalidNameException,
+    void test_registrationFailure_invalidUsername() throws InvalidNameException,
                                                             InvalidEmailAddressException,
                                                             UnavailableEmailAddressException,
                                                             InvalidPasswordException,
@@ -113,7 +113,8 @@ class RegistrationControllerTest {
         verifyNoInteractions(redirectAttributes);
     }
 
-    void test_registration_failure_invalidEmailAddress() throws InvalidNameException,
+    @Test
+    void test_registrationFailure_invalidEmailAddress() throws InvalidNameException,
                                                                 InvalidEmailAddressException,
                                                                 UnavailableEmailAddressException,
                                                                 InvalidPasswordException,
