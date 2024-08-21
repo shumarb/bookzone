@@ -199,4 +199,23 @@ class RegistrationControllerTest {
         verifyNoInteractions(redirectAttributes);
     }
 
+    @Test
+    void test_registrationFailure_unexpectedError() throws  InvalidNameException,
+                                                            InvalidEmailAddressException,
+                                                            InvalidPasswordException,
+                                                            InvalidUsernameException,
+                                                            UnavailableEmailAddressException,
+                                                            UnavailableUsernameException {
+        // Arrange
+        when(registrationService.registration(validName, validUsername, validEmail, validPassword)).thenThrow(new RuntimeException());
+
+        // Act
+        viewName = registrationController.registration(validName, validUsername, validEmail, validPassword, model, redirectAttributes);
+
+        // Assert
+        assertEquals("registration", viewName);
+        verify(model).addAttribute("error", "Unexpected error occurred. Please try again later.");
+        verifyNoInteractions(redirectAttributes);
+    }
+
 }
