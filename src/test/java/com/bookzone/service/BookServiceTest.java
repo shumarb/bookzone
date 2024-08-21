@@ -29,7 +29,10 @@ class BookServiceTest {
     @InjectMocks
     private BookService bookService;
 
+    @Mock
     private Book book1;
+
+    @Mock
     private Book book2;
 
     @BeforeEach
@@ -39,37 +42,50 @@ class BookServiceTest {
     }
 
     @Test
-    void testSaveBook() {
+    void test_saveBook() {
         bookService.saveBook(book1);
         verify(bookRepository, times(1)).save(book1);
     }
 
     @Test
-    void testGetAllBooks() {
+    void test_getAllBooks() {
+        // Arrange
         List<Book> books = new ArrayList<> ();
         books.add(book1);
         books.add(book2);
-        
         when(bookRepository.findAll()).thenReturn(books);
+
+        // Act
         List<Book> result = bookService.getAllBooks();
 
+        // Assert
         assertEquals(books.size(), result.size());
         assertEquals(books, result);
     }
 
     @Test
-    void testGetBookById() {
+    void test_getBookById() {
+        // Arrange
         long id = book1.getId();
         when(bookRepository.findById(id)).thenReturn(Optional.of(book1));
+
+        // Act
         Book result = bookService.getBookById(id);
+
+        // Assert
         assertEquals(book1, result);
     }
 
     @Test
-    void testDeleteBook() {
+    void test_deleteBook() {
+        // Arrange
         long id = book1.getId();
         doNothing().when(bookRepository).deleteById(id);
+
+        // Act
         bookService.deleteBook(id);
+
+        // Assert
         verify(bookRepository, times(1)).deleteById(id);
     }
     
