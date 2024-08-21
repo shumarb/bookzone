@@ -16,7 +16,7 @@ class LibrarianTest {
     Person librarian2;
 
     @BeforeEach
-    void setUp() throws Exception {
+    void setUp() {
         librarian1 = new Librarian("Lucy Tan", "lucy_tan", "lucy.tan@bookzone.com", "Lf21SafS@");
         librarian2 = new Librarian("Farah Ali", "farah_ali","farah.ali@bookzone.com", "M8@fz23");
     }
