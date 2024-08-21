@@ -13,6 +13,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.ui.Model;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 class LoginControllerTest {
@@ -32,6 +33,8 @@ class LoginControllerTest {
     @Mock
     Person person;
 
+    String invalidEmail;
+    String invalidPassword;
     String validEmail;
     String validPassword;
     String viewName;
@@ -39,6 +42,8 @@ class LoginControllerTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
+        invalidEmail = "john_tan@sgbookcollectors.com";
+        invalidPassword = "bbb";
         validEmail = "ali.hassan@sgbookcollectors.com";
         validPassword = "MMMnnn34";
         person = new Librarian("Ali Hassan", "ali_hassan", validEmail, validPassword);
@@ -59,6 +64,20 @@ class LoginControllerTest {
 
         // Assert
         assertEquals("redirect:/home", viewName);
+    }
+
+    @Test
+    void test_loginFailure_incorrectEmailAddress() throws UnsuccessfulLoginException {
+        // Arrange
+        when(loginService.login(invalidEmail, validPassword)).thenThrow(UnsuccessfulLoginException.class);
+
+        // Act
+        viewName = loginController.login(invalidEmail, validPassword, httpSession, model);
+
+        // Assert
+        assertEquals("login", viewName);
+        assertThrows(UnsuccessfulLoginException.class, () -> loginService.login(invalidEmail, validPassword));
+        verify(model).addAttribute("error", "Invalid email or password. Please try again.");
     }
 
 }
