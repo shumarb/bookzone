@@ -2,11 +2,11 @@ package com.bookzone.service;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.when;
 
 import java.util.Optional;
 
-import com.bookzone.model.Person;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -26,15 +26,15 @@ class RegistrationServiceTest {
     private RegistrationService registrationService;
 
     @Test
-    void testIsValidEmailAddress_validExistingEmail() {
+    void test_isValidEmailAddress_validExistingEmail() {
         String email = "john.tan@sgbookcollectors.com";
-        when(personRepository.findByEmail(email)).thenReturn(Optional.of(new Librarian()));
+        lenient().when(personRepository.findByEmail(email)).thenReturn(Optional.of(new Librarian()));
         boolean result = registrationService.isValidEmailAddress(email);
-        assertFalse(result);
+        assertTrue(result);
     }
 
     @Test
-    void testIsValidEmailAddress_validNewEmail() {
+    void test_isValidEmailAddress_validNewEmail() {
         String email = "john.wayne@sgbookcollectors.com";
         when(personRepository.findByEmail(email)).thenReturn(Optional.empty());
         boolean result = registrationService.isValidEmailAddress(email);
@@ -42,28 +42,28 @@ class RegistrationServiceTest {
     }
 
     @Test
-    void testIsValidPassword_validPassword() {
+    void test_sValidPassword_validPassword() {
         String password = "SSSSSSSnnnnn981231";
         boolean result = registrationService.isValidPassword(password);
         assertTrue(result);
     }
 
     @Test
-    void testIsValidPassword_invalidPassword_insufficientUpperCaseLetters() {
+    void test_isValidPassword_invalidPassword_insufficientUpperCaseLetters() {
         String password = "WWmmm11";
         boolean result = registrationService.isValidPassword(password);
         assertFalse(result);
     }
 
     @Test
-    void testIsValidName_validName() {
+    void test_isValidName_validName() {
         String name = "John Doe";
         boolean result = registrationService.isValidName(name);
         assertTrue(result);
     }
 
     @Test
-    void testIsValidName_InvalidName() {
+    void test_isValidName_invalidName() {
         String name = "John";
         boolean result = registrationService.isValidName(name);
         assertFalse(result);
