@@ -108,4 +108,18 @@ class LoginControllerTest {
         verify(model).addAttribute("error", "Invalid email address or password. Please try again.");
     }
 
+    @Test
+    void test_loginFailure_unexpectedError() throws UnsuccessfulLoginException {
+        // Arrange
+        when(loginService.login(validEmail, validPassword)).thenThrow(new RuntimeException());
+
+        // Act
+        viewName = loginController.login(validEmail, validPassword, httpSession, model);
+
+        // Assert
+        assertEquals("login", viewName);
+        assertThrows(RuntimeException.class, () -> loginService.login(validEmail, validPassword));
+        verify(model).addAttribute("error", "Unexpected error occurred. Please try again later.");
+    }
+
 }
