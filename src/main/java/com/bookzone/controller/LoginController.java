@@ -45,8 +45,8 @@ public class LoginController {
      * @param email         The email address of the user.
      * @param password      The password of the user.
      * @param httpSession   The HttpSession to set the logged-in user.
-     * @param model         The model where attributes can be added for the view
-     * @return              Redirection to the Home page for a successful login, or login page
+     * @param model         The model where attributes can be added for the view.
+     * @return              Redirection to the Home page for a successful login, or login page.
      *                      with a message explaining reason for unsuccessful login.
      */
     @PostMapping("/login")
