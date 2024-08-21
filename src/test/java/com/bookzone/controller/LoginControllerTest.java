@@ -77,7 +77,7 @@ class LoginControllerTest {
         // Assert
         assertEquals("login", viewName);
         assertThrows(UnsuccessfulLoginException.class, () -> loginService.login(invalidEmail, validPassword));
-        verify(model).addAttribute("error", "Invalid email or password. Please try again.");
+        verify(model).addAttribute("error", "Invalid email address or password. Please try again.");
     }
 
     @Test
@@ -91,7 +91,21 @@ class LoginControllerTest {
         // Assert
         assertEquals("login", viewName);
         assertThrows(UnsuccessfulLoginException.class, () -> loginService.login(validEmail, invalidPassword));
-        verify(model).addAttribute("error", "Invalid email or password. Please try again.");
+        verify(model).addAttribute("error", "Invalid email address or password. Please try again.");
+    }
+
+    @Test
+    void test_loginFailure_incorrectEmailAddress_and_incorrectPassword() throws UnsuccessfulLoginException {
+        // Arrange
+        when(loginService.login(invalidEmail, invalidPassword)).thenThrow(UnsuccessfulLoginException.class);
+
+        // Act
+        viewName = loginController.login(invalidEmail, invalidPassword, httpSession, model);
+
+        // Assert
+        assertEquals("login", viewName);
+        assertThrows(UnsuccessfulLoginException.class, () -> loginService.login(invalidEmail, invalidPassword));
+        verify(model).addAttribute("error", "Invalid email address or password. Please try again.");
     }
 
 }
