@@ -62,7 +62,7 @@ public class LoginController {
 
         } catch (UnsuccessfulLoginException e) {
             logger.error("LoginControllerLogger: Unsuccessful login. Proceeding to Login page with error message displayed.");
-            model.addAttribute("error", "Invalid email or password. Please try again.");
+            model.addAttribute("error", "Invalid email address or password. Please try again.");
             return "login";
 
         } catch (Exception e) {
