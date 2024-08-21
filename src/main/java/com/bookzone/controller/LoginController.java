@@ -57,7 +57,7 @@ public class LoginController {
         try {
             Person loggedInPerson = loginService.login(email, password);
             httpSession.setAttribute("loggedInPerson", loggedInPerson);
-            logger.info("Successful login. Proceeding to Home page");
+            logger.info("Successful login. Proceeding to Home page.");
             return "redirect:/home";
 
         } catch (UnsuccessfulLoginException e) {
