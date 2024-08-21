@@ -21,11 +21,8 @@ class BookRepositoryTest {
     @Mock
     private BookRepository bookRepository;
 
-    @InjectMocks
-    private BookService bookService;
-
-    @Test
-    void testFindById() {
+   @Test
+    void test_findById() {
         long id = 1;
         Book book1 = new Book(1, "Trust", "Herman Diaz", "Novel", 2022);
         when(bookRepository.findById(id)).thenReturn(Optional.of(book1));
