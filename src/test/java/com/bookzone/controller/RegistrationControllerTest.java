@@ -175,4 +175,23 @@ class RegistrationControllerTest {
         verifyNoInteractions(redirectAttributes);
     }
 
+    @Test
+    void test_registrationFailure_unavailableEmailAddress() throws  InvalidNameException,
+                                                                    InvalidEmailAddressException,
+                                                                    InvalidPasswordException,
+                                                                    InvalidUsernameException,
+                                                                    UnavailableEmailAddressException,
+                                                                    UnavailableUsernameException {
+        // Arrange
+        when(registrationService.registration(validName, validUsername, validEmail, validPassword)).thenThrow(UnavailableEmailAddressException.class);
+
+        // Act
+        viewName = registrationController.registration(validName, validUsername, validEmail, validPassword, model, redirectAttributes);
+
+        // Assert
+        assertEquals("registration", viewName);
+        verify(model).addAttribute("error", "Email address entered is unavailable. Please enter another email address.");
+        verifyNoInteractions(redirectAttributes);
+    }
+
 }
