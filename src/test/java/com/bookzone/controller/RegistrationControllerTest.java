@@ -1,6 +1,11 @@
 package com.bookzone.controller;
 
-import com.bookzone.exceptions.*;
+import com.bookzone.exceptions.InvalidEmailAddressException;
+import com.bookzone.exceptions.InvalidNameException;
+import com.bookzone.exceptions.InvalidPasswordException;
+import com.bookzone.exceptions.InvalidUsernameException;
+import com.bookzone.exceptions.UnavailableEmailAddressException;
+import com.bookzone.exceptions.UnavailableUsernameException;
 import com.bookzone.model.Librarian;
 import com.bookzone.model.Person;
 import com.bookzone.service.RegistrationService;

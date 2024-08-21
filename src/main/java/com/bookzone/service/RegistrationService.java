@@ -4,7 +4,12 @@
 
 package com.bookzone.service;
 
-import com.bookzone.exceptions.*;
+import com.bookzone.exceptions.InvalidEmailAddressException;
+import com.bookzone.exceptions.InvalidNameException;
+import com.bookzone.exceptions.InvalidPasswordException;
+import com.bookzone.exceptions.InvalidUsernameException;
+import com.bookzone.exceptions.UnavailableUsernameException;
+import com.bookzone.exceptions.UnavailableEmailAddressException;
 import com.bookzone.model.Person;
 import com.bookzone.repository.PersonRepository;
 import org.apache.logging.log4j.LogManager;
