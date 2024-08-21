@@ -176,6 +176,7 @@ class RegistrationControllerTest {
 
         // Assert
         assertEquals("registration", viewName);
+        assertThrows(UnavailableUsernameException.class, () -> registrationService.registration(validName, validUsername, validEmail, validPassword));
         verify(model).addAttribute("error", "Username entered is unavailable. Please enter another username.");
         verifyNoInteractions(redirectAttributes);
     }
@@ -195,6 +196,7 @@ class RegistrationControllerTest {
 
         // Assert
         assertEquals("registration", viewName);
+        assertThrows(UnavailableEmailAddressException.class, () -> registrationService.registration(validName, validUsername, validEmail, validPassword));
         verify(model).addAttribute("error", "Email address entered is unavailable. Please enter another email address.");
         verifyNoInteractions(redirectAttributes);
     }
@@ -214,6 +216,7 @@ class RegistrationControllerTest {
 
         // Assert
         assertEquals("registration", viewName);
+        assertThrows(Exception.class, () -> registrationService.registration(validName, validUsername, validEmail, validPassword));
         verify(model).addAttribute("error", "Unexpected error occurred. Please try again later.");
         verifyNoInteractions(redirectAttributes);
     }
