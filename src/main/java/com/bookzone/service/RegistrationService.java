@@ -100,7 +100,7 @@ public class RegistrationService {
 		if (result) {
 			logger.info("Email address is available for registration: {}", email);
 		} else {
-			logger.info("Email address is unavailable for registration: {}", email);
+			logger.error("Email address is unavailable for registration: {}", email);
 		}
 		return result;
 	}
@@ -156,7 +156,7 @@ public class RegistrationService {
 			logger.info("Valid email address: {}", email);
 			return true;
 		}
-		logger.info("Invalid email address: {}", email);
+		logger.error("Invalid email address: {}", email);
 		return false;
 	}
 	
@@ -208,7 +208,7 @@ public class RegistrationService {
 	 */
 	public boolean isValidPassword(String password) {
 		if (password.length() < 8) {
-			logger.info("Invalid password: Password length is less than 8 characters: {}", password);
+			logger.error("Invalid password (Password length is less than 8 characters): {}", password);
 			return false;
 		}
 
@@ -230,15 +230,15 @@ public class RegistrationService {
 	    }
 
 		if (numberOfUpperCaseLetters < 3) {
-			logger.error("Invalid password: Password has less than 3 uppercase letters: {}", password);
+			logger.error("Invalid password (Password has less than 3 uppercase letters): {}", password);
 			return false;
 
 		} else if (numberOfLowerCaseLetters < 3) {
-			logger.error("Invalid password: Password has less than 3 lowercase letters: {}", password);
+			logger.error("Invalid password (Password has less than 3 lowercase letters): {}", password);
 			return false;
 
 		} else if (numberOfNumbers < 2) {
-			logger.error("Invalid password: Password has less than 2 numbers: {}", password);
+			logger.error("Invalid password (Password has less than 2 numbers): {}", password);
 			return false;
 
 		} else {
