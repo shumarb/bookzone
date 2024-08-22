@@ -128,11 +128,21 @@ public class RegistrationService {
 	 * @return True if username comprises a single word with at least 5 characters, false otherwise.
 	 */
 	public boolean isValidUsername(String username) {
-		String[] words = username.split(" ");
-		if (words.length != 1) {
-			return false;
+		boolean isSingleWord = username.split(" ").length == 1;
+		boolean isLongEnough = username.length() >= 5;
+		boolean isValidUsername = isSingleWord && isLongEnough;
+
+		if (isValidUsername) {
+			logger.info("Valid username (Single word with at least 5 characters): {}", username);
+		} else {
+			if (!isSingleWord) {
+				logger.error("Invalid username (Comprises more than 1 word): {}", username);
+			}
+			if (!isLongEnough){
+				logger.error("Invalid username (Less than 5 characters): {}", username);
+			}
 		}
-		return username.length() >= 5;
+		return isValidUsername;
 	}
 
 	/**
@@ -160,14 +170,14 @@ public class RegistrationService {
 		String[] nameValues = name.split(" ");
 		// 1. Invalid if name has less than 2 words
 		if (nameValues.length < 2) {
-			logger.error("Name has less than 2 words: {}", name);
+			logger.error("Invalid name (Name has less than 2 words): {}", name);
 			return false;
 		}
 		
 		// 2. Invalid if each word has less than 3 characters
         for (String nameValue : nameValues) {
             if (nameValue.length() < 3) {
-                logger.info("At least 1 word in the name has less than 3 characters: {}", name);
+                logger.error("Invalid name (At least 1 word in the name has less than 3 characters): {}", name);
                 return false;
             }
         }
@@ -177,7 +187,7 @@ public class RegistrationService {
 		// Invalid if there exists at least 1 character that is not a letter
         for (String word : nameValues) {
             if (word != null && !word.matches("[a-zA-Z]+")) {
-                logger.error("There is at least 1 character detected in the name: {}", name);
+                logger.error("Invalid name (At least 1 character detected in the name): {}", name);
                 return false;
             }
         }
@@ -220,15 +230,15 @@ public class RegistrationService {
 	    }
 
 		if (numberOfUpperCaseLetters < 3) {
-			logger.info("Invalid password: Password has less than 3 uppercase letters: {}", password);
+			logger.error("Invalid password: Password has less than 3 uppercase letters: {}", password);
 			return false;
 
 		} else if (numberOfLowerCaseLetters < 3) {
-			logger.info("Invalid password: Password has less than 3 lowercase letters: {}", password);
+			logger.error("Invalid password: Password has less than 3 lowercase letters: {}", password);
 			return false;
 
 		} else if (numberOfNumbers < 2) {
-			logger.info("Invalid password: Password has less than 2 numbers: {}", password);
+			logger.error("Invalid password: Password has less than 2 numbers: {}", password);
 			return false;
 
 		} else {
