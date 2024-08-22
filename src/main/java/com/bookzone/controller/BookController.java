@@ -49,7 +49,7 @@ public class BookController {
 	@GetMapping("/catalogue")
 	public ModelAndView getAllBooks() {
 		List<Book> list = bookService.getAllBooks();
-		logger.info("Displaying all books in the catalogue.");
+		logger.info("Displaying all books in the catalogue");
 		return new ModelAndView("catalogue", "book", list);
 	}
 	
