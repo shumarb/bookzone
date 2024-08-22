@@ -95,7 +95,7 @@ public class RegistrationService {
 	 * @param email The email address to check.
 	 * @return True if the email address is not unregistered, false otherwise.
 	 */
-	private boolean isEmailAddressAvailable(String email) {
+	public boolean isEmailAddressAvailable(String email) {
 		boolean result = personRepository.findByEmail(email).isEmpty();
 		if (result) {
 			logger.info("Email address is available for registration: {}", email);
@@ -111,7 +111,7 @@ public class RegistrationService {
 	 * @param username The username to check.
 	 * @return True is username is unregistered, false otherwise.
 	 */
-	private boolean isUsernameAvailable(String username) {
+	public boolean isUsernameAvailable(String username) {
 		boolean result = personRepository.findByUsername(username).isEmpty();
 		if (result) {
 			logger.info("Available username: {}", username);
@@ -127,7 +127,7 @@ public class RegistrationService {
 	 * @param username The username to check.
 	 * @return True if username comprises a single word with at least 5 characters, false otherwise.
 	 */
-	private boolean isValidUsername(String username) {
+	public boolean isValidUsername(String username) {
 		String[] words = username.split(" ");
 		if (words.length != 1) {
 			return false;
