@@ -45,17 +45,17 @@ class LoginControllerTest {
         invalidEmail = "john_tan@sgbookcollectors.com";
         invalidPassword = "bbb";
         validEmail = "ali.hassan@sgbookcollectors.com";
-        validPassword = "MMMnnn34";
+        validPassword = "HelloWorld34";
         person = new Librarian("Ali Hassan", "ali_hassan", validEmail, validPassword);
     }
 
     @Test
-    void test_showLogin() {
+    void returnLoginViewWhenLoginIsCalled() {
         assertEquals("login", loginController.showLogin());
     }
 
     @Test
-    void test_loginSuccess() throws UnsuccessfulLoginException {
+    void redirectToHomeForSuccessfulLogin() throws UnsuccessfulLoginException {
         // Arrange
         when(loginService.login(validEmail, validPassword)).thenReturn(person);
 
@@ -67,7 +67,7 @@ class LoginControllerTest {
     }
 
     @Test
-    void test_loginFailure_incorrectEmailAddress() throws UnsuccessfulLoginException {
+    void returnLoginViewForLoginFailureDueToIncorrectEmailAddress() throws UnsuccessfulLoginException {
         // Arrange
         when(loginService.login(invalidEmail, validPassword)).thenThrow(UnsuccessfulLoginException.class);
 
@@ -81,7 +81,7 @@ class LoginControllerTest {
     }
 
     @Test
-    void test_loginFailure_incorrectPassword() throws UnsuccessfulLoginException {
+    void returnLoginViewForLoginFailureDueToIncorrectPassword() throws UnsuccessfulLoginException {
         // Arrange
         when(loginService.login(validEmail, invalidPassword)).thenThrow(UnsuccessfulLoginException.class);
 
@@ -95,7 +95,7 @@ class LoginControllerTest {
     }
 
     @Test
-    void test_loginFailure_incorrectEmailAddress_and_incorrectPassword() throws UnsuccessfulLoginException {
+    void returnLoginViewForLoginFailureDueToIncorrectEmailAddressAndPassword() throws UnsuccessfulLoginException {
         // Arrange
         when(loginService.login(invalidEmail, invalidPassword)).thenThrow(UnsuccessfulLoginException.class);
 
@@ -109,7 +109,7 @@ class LoginControllerTest {
     }
 
     @Test
-    void test_loginFailure_unexpectedError() throws UnsuccessfulLoginException {
+    void returnLoginViewForLoginFailureDueToUnexpectedError() throws UnsuccessfulLoginException {
         // Arrange
         when(loginService.login(validEmail, validPassword)).thenThrow(new RuntimeException());
 

@@ -42,13 +42,13 @@ class BookServiceTest {
     }
 
     @Test
-    void test_saveBook() {
+    void saveBookSuccessfully() {
         bookService.saveBook(book1);
         verify(bookRepository, times(1)).save(book1);
     }
 
     @Test
-    void test_getAllBooks() {
+    void getAllBooksReturnsListOfBooks() {
         // Arrange
         List<Book> books = new ArrayList<> ();
         books.add(book1);
@@ -64,7 +64,7 @@ class BookServiceTest {
     }
 
     @Test
-    void test_getBookById() {
+    void getBookByIdReturnsCorrectBook() {
         // Arrange
         long id = book1.getId();
         when(bookRepository.findById(id)).thenReturn(Optional.of(book1));
@@ -77,7 +77,7 @@ class BookServiceTest {
     }
 
     @Test
-    void test_deleteBook() {
+    void deleteBookByIdSuccessfully() {
         // Arrange
         long id = book1.getId();
         doNothing().when(bookRepository).deleteById(id);
