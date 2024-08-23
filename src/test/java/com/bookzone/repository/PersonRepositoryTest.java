@@ -2,6 +2,7 @@ package com.bookzone.repository;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.util.Optional;
 
@@ -20,13 +21,18 @@ class PersonRepositoryTest {
     private PersonRepository personRepository;
 
     @Test
-    void testFindByEmail() {
+    void returnsCorrectLibrarianWhenEmailIsFound() {
+        // Arrange
         String email = "mike.lee@sgbookcollectors.com";
-        Person librarian = new Librarian("Mike Lee", "mike_lee", email, "MMM22llla3");
+        Person librarian = new Librarian("Mike Lee", "mike_lee", email, "HELLoWorld123");
+        when(personRepository.findByEmail(email)).thenReturn(Optional.of(librarian));
 
+        // Act
         Optional<Person> optionalLibrarian = personRepository.findByEmail(email);
 
+        // Assert
         verify(personRepository).findByEmail(email);
         assertEquals(librarian, optionalLibrarian.orElse(null));
     }
+
 }

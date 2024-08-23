@@ -22,7 +22,7 @@ class BookRepositoryTest {
     private BookRepository bookRepository;
 
    @Test
-    void test_findById() {
+    void returnsCorrectBookWhenIdIsFound() {
         long id = 1;
         Book book1 = new Book(1, "Trust", "Herman Diaz", "Novel", 2022);
         when(bookRepository.findById(id)).thenReturn(Optional.of(book1));
