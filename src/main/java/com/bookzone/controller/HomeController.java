@@ -32,10 +32,16 @@ public class HomeController {
 	 */
 	@GetMapping("/home")
 	public String showHome(HttpSession httpSession, Model model) {
-		Person loggedInPerson = (Person) httpSession.getAttribute("loggedInPerson");
-		logger.info("Currently at Home page. Accessed by {}", loggedInPerson.toString());
-		model.addAttribute("loggedInPerson", loggedInPerson);
-		return "home";
+		try {
+			Person loggedInPerson = (Person) httpSession.getAttribute("loggedInPerson");
+			httpSession.setAttribute("loggedInPerson", loggedInPerson);
+			logger.info("Currently at Home page. Accessed by {}", loggedInPerson.toString());
+			model.addAttribute("loggedInPerson", loggedInPerson);
+			return "home";
+		} catch (Exception e) {
+			logger.error("No logged-in user found in the session.");
+			return "redirect:/login";
+		}
 	}
 
 	/**
@@ -49,11 +55,17 @@ public class HomeController {
 	 */
 	@PostMapping("/logout")
 	public String logout(HttpSession httpSession, RedirectAttributes redirectAttributes) {
-		Person loggedInPerson = (Person) httpSession.getAttribute("loggedInPerson");
-		httpSession.invalidate();
-		logger.info("Successful logout | {}", loggedInPerson.toString());
-		redirectAttributes.addFlashAttribute("successfulLogout", "You have successfully logged out.");
-		return "redirect:/";
+		try {
+			Person loggedInPerson = (Person) httpSession.getAttribute("loggedInPerson");
+			logger.info("Successful logout | {}", loggedInPerson.toString());
+			httpSession.invalidate();
+			redirectAttributes.addFlashAttribute("successfulLogout", "You have successfully logged out.");
+			return "redirect:/";
+
+		} catch (Exception e){
+			logger.error("Unable to logout.");
+			return "home";
+		}
 	}
 	
 }

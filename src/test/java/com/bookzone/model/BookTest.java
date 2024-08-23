@@ -22,94 +22,68 @@ class BookTest {
 	}
 
 	@Test
-	void testTitle_returnsCorrectTitle() {
-		
+	void test_returnsCorrectTitle() {
 		assertEquals("King: A Life", book1.getTitle());
-		
 	}
 	
 	@Test
-	void testTitle_doesNotReturnIncorrectTitle() {
-		
+	void test_doesNotReturnIncorrectTitle() {
 		assertNotEquals(book2.getTitle(), book1.getTitle());
-		
 	}
 	
 	@Test
-	void testTitle_doesNotReturnNullForCorrectTitle() {
-		
+	void test_doesNotReturnNullForCorrectTitle() {
 		assertNotEquals(null, book1.getAuthor());
-		
 	}
 	
 	@Test
-	void testAuthor_returnsCorrectAuthor() {
-	
+	void test_returnsCorrectAuthor() {
 		assertEquals("Daniel Handler", book2.getAuthor());
-		
 	}
 	
 	@Test
-	void testAuthor_doesNotReturnIncorrectAuthor() {
-		
+	void test_doesNotReturnIncorrectAuthor() {
 		assertNotEquals(book1.getAuthor(), book2.getAuthor());
-		
 	}
 	
 	@Test
-	void testAuthor_doesNotReturnNullForCorrectAuthor() {
-		
+	void test_doesNotReturnNullForCorrectAuthor() {
 		assertNotEquals(null, book1.getAuthor());
-		
 	}
 	
 	@Test
-	void testYear_returnsCorrectYear() {
-		
+	void test_returnsCorrectYear() {
 		assertEquals(2023, book1.getYear());
-		
 	}
 	
 	@Test
-	void testYear_doesNotReturnIncorrectPrice() {
-		
+	void test_doesNotReturnIncorrectPrice() {
 		assertNotEquals(book2.getYear(), book1.getYear());
-		
 	}
 	
 	@Test
-	void testCategory_returnsCorrectCategory() {
-		
+	void test_returnsCorrectCategory() {
 		assertEquals("Novel", book2.getCategory());
-		
 	}
 	
 	@Test
-	void testCategory_doesNotReturnIncorrectCategory() {
-		
+	void test_doesNotReturnIncorrectCategory() {
 		assertNotEquals(book1.getCategory(), book2.getCategory());
-		
 	}
 	
 	@Test
-	void testCategory_doesNotReturnNullForCorrectUser() {
-		
+	void test_doesNotReturnNullForCorrectUser() {
 		assertNotEquals(null, book2.getCategory());
-		
 	}
 	
 	@Test
-	void testId_returnsCorrectId() {
-		
+	void test_returnsCorrectId() {
 		assertEquals(1, book1.getId());
-		
 	}
 	
 	@Test
-	void testId_doesNotReturnIncorrectId() {
-		
+	void test_doesNotReturnIncorrectId() {
 		assertNotEquals(book2.getId(), book1.getId());
-		
 	}
 
 }

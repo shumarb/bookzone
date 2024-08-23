@@ -4,7 +4,12 @@
 
 package com.bookzone.service;
 
-import com.bookzone.exceptions.*;
+import com.bookzone.exceptions.InvalidEmailAddressException;
+import com.bookzone.exceptions.InvalidNameException;
+import com.bookzone.exceptions.InvalidPasswordException;
+import com.bookzone.exceptions.InvalidUsernameException;
+import com.bookzone.exceptions.UnavailableUsernameException;
+import com.bookzone.exceptions.UnavailableEmailAddressException;
 import com.bookzone.model.Person;
 import com.bookzone.repository.PersonRepository;
 import org.apache.logging.log4j.LogManager;
@@ -90,12 +95,12 @@ public class RegistrationService {
 	 * @param email The email address to check.
 	 * @return True if the email address is not unregistered, false otherwise.
 	 */
-	private boolean isEmailAddressAvailable(String email) {
+	public boolean isEmailAddressAvailable(String email) {
 		boolean result = personRepository.findByEmail(email).isEmpty();
 		if (result) {
 			logger.info("Email address is available for registration: {}", email);
 		} else {
-			logger.info("Email address is unavailable for registration: {}", email);
+			logger.error("Email address is unavailable for registration: {}", email);
 		}
 		return result;
 	}
@@ -106,8 +111,14 @@ public class RegistrationService {
 	 * @param username The username to check.
 	 * @return True is username is unregistered, false otherwise.
 	 */
-	private boolean isUsernameAvailable(String username) {
-		return personRepository.findByUsername(username).isEmpty();
+	public boolean isUsernameAvailable(String username) {
+		boolean result = personRepository.findByUsername(username).isEmpty();
+		if (result) {
+			logger.info("Available username: {}", username);
+		} else {
+			logger.error("Unavailable username: {}", username);
+		}
+		return result;
 	}
 
 	/**
@@ -116,12 +127,22 @@ public class RegistrationService {
 	 * @param username The username to check.
 	 * @return True if username comprises a single word with at least 5 characters, false otherwise.
 	 */
-	private boolean isValidUsername(String username) {
-		String[] words = username.split(" ");
-		if (words.length != 1) {
-			return false;
+	public boolean isValidUsername(String username) {
+		boolean isSingleWord = username.split(" ").length == 1;
+		boolean isLongEnough = username.length() >= 5;
+		boolean isValidUsername = isSingleWord && isLongEnough;
+
+		if (isValidUsername) {
+			logger.info("Valid username (Single word with at least 5 characters): {}", username);
+		} else {
+			if (!isSingleWord) {
+				logger.error("Invalid username (Comprises more than 1 word): {}", username);
+			}
+			if (!isLongEnough){
+				logger.error("Invalid username (Less than 5 characters): {}", username);
+			}
 		}
-		return username.length() >= 5;
+		return isValidUsername;
 	}
 
 	/**
@@ -135,7 +156,7 @@ public class RegistrationService {
 			logger.info("Valid email address: {}", email);
 			return true;
 		}
-		logger.info("Invalid email address: {}", email);
+		logger.error("Invalid email address: {}", email);
 		return false;
 	}
 	
@@ -149,14 +170,14 @@ public class RegistrationService {
 		String[] nameValues = name.split(" ");
 		// 1. Invalid if name has less than 2 words
 		if (nameValues.length < 2) {
-			logger.error("Name has less than 2 words: {}", name);
+			logger.error("Invalid name (Name has less than 2 words): {}", name);
 			return false;
 		}
 		
 		// 2. Invalid if each word has less than 3 characters
         for (String nameValue : nameValues) {
             if (nameValue.length() < 3) {
-                logger.info("At least 1 word in the name has less than 3 characters: {}", name);
+                logger.error("Invalid name (At least 1 word in the name has less than 3 characters): {}", name);
                 return false;
             }
         }
@@ -166,7 +187,7 @@ public class RegistrationService {
 		// Invalid if there exists at least 1 character that is not a letter
         for (String word : nameValues) {
             if (word != null && !word.matches("[a-zA-Z]+")) {
-                logger.error("There is at least 1 character detected in the name: {}", name);
+                logger.error("Invalid name (At least 1 character detected in the name): {}", name);
                 return false;
             }
         }
@@ -187,7 +208,7 @@ public class RegistrationService {
 	 */
 	public boolean isValidPassword(String password) {
 		if (password.length() < 8) {
-			logger.info("Invalid password: Password length is less than 8 characters: {}", password);
+			logger.error("Invalid password (Password length is less than 8 characters): {}", password);
 			return false;
 		}
 
@@ -209,15 +230,15 @@ public class RegistrationService {
 	    }
 
 		if (numberOfUpperCaseLetters < 3) {
-			logger.info("Invalid password: Password has less than 3 uppercase letters: {}", password);
+			logger.error("Invalid password (Password has less than 3 uppercase letters): {}", password);
 			return false;
 
 		} else if (numberOfLowerCaseLetters < 3) {
-			logger.info("Invalid password: Password has less than 3 lowercase letters: {}", password);
+			logger.error("Invalid password (Password has less than 3 lowercase letters): {}", password);
 			return false;
 
 		} else if (numberOfNumbers < 2) {
-			logger.info("Invalid password: Password has less than 2 numbers: {}", password);
+			logger.error("Invalid password (Password has less than 2 numbers): {}", password);
 			return false;
 
 		} else {

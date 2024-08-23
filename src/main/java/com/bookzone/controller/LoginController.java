@@ -45,8 +45,8 @@ public class LoginController {
      * @param email         The email address of the user.
      * @param password      The password of the user.
      * @param httpSession   The HttpSession to set the logged-in user.
-     * @param model         The model where attributes can be added for the view
-     * @return              Redirection to the Home page for a successful login, or login page
+     * @param model         The model where attributes can be added for the view.
+     * @return              Redirection to the Home page for a successful login, or login page.
      *                      with a message explaining reason for unsuccessful login.
      */
     @PostMapping("/login")
@@ -57,16 +57,16 @@ public class LoginController {
         try {
             Person loggedInPerson = loginService.login(email, password);
             httpSession.setAttribute("loggedInPerson", loggedInPerson);
-            logger.info("LoginControllerLogger: Successful login. Proceeding to Home page");
+            logger.info("Successful login. Proceeding to Home page.");
             return "redirect:/home";
 
         } catch (UnsuccessfulLoginException e) {
-            logger.error("LoginControllerLogger: Unsuccessful login. Proceeding to Login page with error message displayed.");
-            model.addAttribute("error", "Invalid email or password. Please try again.");
+            logger.error("Unsuccessful login due to invalid email address or password. Proceeding to Login page with error message displayed.");
+            model.addAttribute("error", "Invalid email address or password. Please try again.");
             return "login";
 
         } catch (Exception e) {
-            logger.error("Unsuccessful login. Proceeding to Login page with error message displayed.");
+            logger.fatal("Unsuccessful login due to unexpected error. Proceeding to Login page with error message displayed.");
             model.addAttribute("error", "Unexpected error occurred. Please try again later.");
             return "login";
         }
