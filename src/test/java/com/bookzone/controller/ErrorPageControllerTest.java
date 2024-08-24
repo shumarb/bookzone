@@ -27,7 +27,7 @@ class ErrorPageControllerTest {
 	}
 
 	@Test
-	void test_invalidUrl() throws Exception {
+	void invalidUrlDirectsToErrorPage() throws Exception {
 		mockMvc.perform(MockMvcRequestBuilders.get("/wwwewqeq"))
 				.andExpect(MockMvcResultMatchers.status().isNotFound())
 				.andDo(MockMvcResultHandlers.print());
