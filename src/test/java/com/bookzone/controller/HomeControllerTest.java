@@ -36,7 +36,7 @@ public class HomeControllerTest {
     }
 
     @Test
-    public void testShowHome() throws Exception {
+    public void showHome() throws Exception {
         // Add Person entity to the session
         mockSession.setAttribute("loggedInPerson", person);
 
@@ -50,7 +50,7 @@ public class HomeControllerTest {
     }
 
     @Test
-    public void testLogout() throws Exception {
+    public void logout() throws Exception {
         // Add Person entity to the session
         mockSession.setAttribute("loggedInPerson", person);
 
