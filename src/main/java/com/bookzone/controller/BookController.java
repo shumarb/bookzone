@@ -73,7 +73,7 @@ public class BookController {
 	 * @param model 	The model to add the {@link Book} entity to.
 	 * @return 			The view name of the Edit page.
 	 */
-	@RequestMapping("/editBook/{id}")
+	@RequestMapping("/edit/{id}")
 	public String editBook(@PathVariable("id") long id, Model model) {
 		Book book = bookService.getBookById(id);
 		logger.info("Editing book: {}", book.toString());

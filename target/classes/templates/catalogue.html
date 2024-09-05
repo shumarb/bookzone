@@ -44,7 +44,7 @@
 			<td th:text="${b.category}"></td>
 			<td th:text="${b.year}"></td>
 			<td>
-				<a style="color:blue" th:href="@{/editBook/{id}(id=${b.id})}">
+				<a style="color:blue" th:href="@{/edit/{id}(id=${b.id})}">
 					<i class="fa-solid fa-pen-to-square ms-4"></i>
 				</a>
 				<a style="color:red" th:href="@{/deleteBook/{id}(id=${b.id})}">
