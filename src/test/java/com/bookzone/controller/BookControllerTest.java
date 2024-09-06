@@ -42,7 +42,7 @@ class BookControllerTest {
     }
 
     @Test
-    void test_addBook() throws Exception {
+    void testSAddBook() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.post("/save")
                 .param("title", book1.getTitle())
                 .param("author", book1.getAuthor())
@@ -54,7 +54,7 @@ class BookControllerTest {
     }
     
     @Test
-    void test_editBook() throws Exception {
+    void testEditBook() throws Exception {
         when(bookService.getBookById(book1.getId())).thenReturn(book1);
 
         mockMvc.perform(MockMvcRequestBuilders.get("/editBook/1"))
@@ -67,7 +67,7 @@ class BookControllerTest {
     }
     
     @Test
-    void test_deleteBook() throws Exception {
+    void testDeleteBook() throws Exception {
         when(bookService.getBookById(book1.getId())).thenReturn(book1);
 
         mockMvc.perform(MockMvcRequestBuilders.get("/deleteBook/1"))
