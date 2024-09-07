@@ -53,12 +53,12 @@ class RegistrationControllerTest {
     }
 
     @Test
-    void test_showRegistration() {
+    void testShowRegistration() {
         assertEquals(registrationController.showRegistration(), "registration");
     }
 
     @Test
-    void test_registrationSuccess() throws  InvalidNameException,
+    void testRegistrationSuccess() throws  InvalidNameException,
                                             InvalidEmailAddressException,
                                             InvalidPasswordException,
                                             InvalidUsernameException,
@@ -78,12 +78,12 @@ class RegistrationControllerTest {
     }
 
     @Test
-    void test_registrationFailure_invalidName() throws  InvalidNameException,
-                                                        InvalidEmailAddressException,
-                                                        InvalidPasswordException,
-                                                        InvalidUsernameException,
-                                                        UnavailableEmailAddressException,
-                                                        UnavailableUsernameException {
+    void testRegistrationFailureDueToInvalidName() throws   InvalidNameException,
+                                                            InvalidEmailAddressException,
+                                                            InvalidPasswordException,
+                                                            InvalidUsernameException,
+                                                            UnavailableEmailAddressException,
+                                                            UnavailableUsernameException {
         // Arrange
         Person librarian = new Librarian("john", validUsername, validEmail, validPassword);
         when(registrationService.registration("john", validUsername, validEmail, validPassword)).thenThrow(InvalidNameException.class);
@@ -99,12 +99,12 @@ class RegistrationControllerTest {
     }
 
     @Test
-    void test_registrationFailure_invalidUsername() throws  InvalidNameException,
-                                                            InvalidEmailAddressException,
-                                                            InvalidPasswordException,
-                                                            InvalidUsernameException,
-                                                            UnavailableEmailAddressException,
-                                                            UnavailableUsernameException {
+    void testRegistrationFailureDueToInvalidUsername() throws   InvalidNameException,
+                                                                InvalidEmailAddressException,
+                                                                InvalidPasswordException,
+                                                                InvalidUsernameException,
+                                                                UnavailableEmailAddressException,
+                                                                UnavailableUsernameException {
         // Arrange
         Person librarian = new Librarian(validName, "ada", validEmail, validPassword);
         when(registrationService.registration(validName, "ada", validEmail, validPassword)).thenThrow(InvalidUsernameException.class);
@@ -120,12 +120,12 @@ class RegistrationControllerTest {
     }
 
     @Test
-    void test_registrationFailure_invalidEmailAddress() throws  InvalidNameException,
-                                                                InvalidEmailAddressException,
-                                                                InvalidPasswordException,
-                                                                InvalidUsernameException,
-                                                                UnavailableEmailAddressException,
-                                                                UnavailableUsernameException {
+    void testRegistrationFailureDueToInvalidEmailAddress() throws   InvalidNameException,
+                                                                    InvalidEmailAddressException,
+                                                                    InvalidPasswordException,
+                                                                    InvalidUsernameException,
+                                                                    UnavailableEmailAddressException,
+                                                                    UnavailableUsernameException {
         // Arrange
         Person librarian = new Librarian(validName, validUsername, "ada", validPassword);
         when(registrationService.registration(validName, validUsername, "ada", validPassword)).thenThrow(InvalidEmailAddressException.class);
@@ -141,12 +141,12 @@ class RegistrationControllerTest {
     }
 
     @Test
-    void test_registrationFailure_invalidPassword() throws  InvalidNameException,
-                                                            InvalidEmailAddressException,
-                                                            InvalidPasswordException,
-                                                            InvalidUsernameException,
-                                                            UnavailableEmailAddressException,
-                                                            UnavailableUsernameException {
+    void testRegistrationFailureDueToInvalidPassword() throws   InvalidNameException,
+                                                                InvalidEmailAddressException,
+                                                                InvalidPasswordException,
+                                                                InvalidUsernameException,
+                                                                UnavailableEmailAddressException,
+                                                                UnavailableUsernameException {
         // Arrange
         Person librarian = new Librarian(validName, validUsername, validEmail, "ada");
         when(registrationService.registration(validName, validUsername, validEmail, "ada")).thenThrow(InvalidPasswordException.class);
@@ -162,12 +162,12 @@ class RegistrationControllerTest {
     }
 
     @Test
-    void test_registrationFailure_unavailableUsername() throws  InvalidNameException,
-                                                                InvalidEmailAddressException,
-                                                                InvalidPasswordException,
-                                                                InvalidUsernameException,
-                                                                UnavailableEmailAddressException,
-                                                                UnavailableUsernameException {
+    void testRegistrationFailureDueToUnavailableUsername() throws   InvalidNameException,
+                                                                    InvalidEmailAddressException,
+                                                                    InvalidPasswordException,
+                                                                    InvalidUsernameException,
+                                                                    UnavailableEmailAddressException,
+                                                                    UnavailableUsernameException {
         // Arrange
         when(registrationService.registration(validName, validUsername, validEmail, validPassword)).thenThrow(UnavailableUsernameException.class);
 
@@ -182,12 +182,12 @@ class RegistrationControllerTest {
     }
 
     @Test
-    void test_registrationFailure_unavailableEmailAddress() throws  InvalidNameException,
-                                                                    InvalidEmailAddressException,
-                                                                    InvalidPasswordException,
-                                                                    InvalidUsernameException,
-                                                                    UnavailableEmailAddressException,
-                                                                    UnavailableUsernameException {
+    void testRegistrationFailureDueToUnavailableEmailAddress() throws   InvalidNameException,
+                                                                        InvalidEmailAddressException,
+                                                                        InvalidPasswordException,
+                                                                        InvalidUsernameException,
+                                                                        UnavailableEmailAddressException,
+                                                                        UnavailableUsernameException {
         // Arrange
         when(registrationService.registration(validName, validUsername, validEmail, validPassword)).thenThrow(UnavailableEmailAddressException.class);
 
@@ -202,12 +202,12 @@ class RegistrationControllerTest {
     }
 
     @Test
-    void test_registrationFailure_unexpectedError() throws  InvalidNameException,
-                                                            InvalidEmailAddressException,
-                                                            InvalidPasswordException,
-                                                            InvalidUsernameException,
-                                                            UnavailableEmailAddressException,
-                                                            UnavailableUsernameException {
+    void testRegistrationFailureDueToUnexpectedError() throws   InvalidNameException,
+                                                                InvalidEmailAddressException,
+                                                                InvalidPasswordException,
+                                                                InvalidUsernameException,
+                                                                UnavailableEmailAddressException,
+                                                                UnavailableUsernameException {
         // Arrange
         when(registrationService.registration(validName, validUsername, validEmail, validPassword)).thenThrow(new RuntimeException());
 
