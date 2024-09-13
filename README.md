@@ -22,18 +22,20 @@ The application features `adding`, `editing`, and `deleting` a book.
     - Line 7: Set `spring.datasource.username=name-of-your-mysql-password`.
 
 ## Instructions
-1. Run `git pull origin main` to ensure you have the latest version of the repository.
-2. Right-click the `BookzoneApplication` class file (Location: `src/main/java/com/example/WorkPortal/BookzoneApplication.java`).
-3. Select `Run 'BookzoneApplic....main()`.
-4. If there are issues with running the application, perform the following before repeating Step 1:
+1. Open the `terminal` of your local machine.
+2. Navigate to the location of the cloned repository.
+3. Run `git pull origin main` to ensure you have the latest version of the repository.
+4. Right-click the `BookzoneApplication` class file (Location: `src/main/java/com/example/WorkPortal/BookzoneApplication.java`).
+5. Select `Run 'BookzoneApplic....main()`.
+6. If there are issues with running the application, perform the following before repeating Step 1:
     - Click the `Maven icon` on the right.
     - Navigate to `bookzone/Lifecycle`.
     - Click `Clean`, then `Install`.
     - Drop all tables in the schema.
     - Close and reopen IntelliJ IDEA.
-5. Enter `localhost:9001/` in your browser after seeing the message `Started BookzoneApplication` in the `console`.
-6. Explore the application.
-7. Explore data in theMySQL Workbench:
+7. Enter `localhost:9001/` in your browser after seeing the message `Started BookzoneApplication` in the `console`.
+8. Explore the application.
+9. Explore data in theMySQL Workbench:
    - Expand the schema to view `Books (denoted as catalogue)`, `Librarians (denoted as librarians)`, and `Persons (denoted as persons)` tables.
    - `Catalogue` table: Contains `id`, `author`, `category`, `title`, `year`.
    - `Person` table: Contains `id`, `name`, `email`, and `password`.
