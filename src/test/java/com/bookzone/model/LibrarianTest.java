@@ -22,62 +22,62 @@ class LibrarianTest {
     }
 
     @Test
-    void test_checkName_returnsCorrectName() {
+    void testCheckNameReturnsCorrectName() {
         assertEquals("Farah Ali", librarian2.getName());
     }
 
     @Test
-    void test_checkName_doesNotReturnIncorrectName() {
+    void testCheckNameDoesNotReturnIncorrectName() {
         assertNotEquals(librarian1.getName(), librarian2.getName());
     }
 
     @Test
-    void test_checkName_doesNotReturnNullForExistingLibrarian() {
+    void testCheckNameDoesNotReturnNullForExistingLibrarian() {
         assertNotEquals(null, librarian2.getName());
     }
 
     @Test
-    void test_checkUsername_returnsCorrectUsername() {
+    void testCheckUsernameReturnsCorrectUsername() {
         assertEquals("farah_ali", librarian2.getUsername());
     }
 
     @Test
-    void test_checkUsername_doesNotReturnsIncorrectUsername() {
+    void testCheckUsernameDoesNotReturnsIncorrectUsername() {
         assertNotEquals(librarian1.getUsername(), librarian2.getUsername());
     }
 
     @Test
-    void test_checkUsername_doesNotReturnNullForCorrectUsername() {
+    void testCheckUsernameDoesNotReturnNullForCorrectUsername() {
         assertNotEquals(null, librarian2.getUsername());
     }
 
     @Test
-    void test_checkEmail_returnsCorrectEmail() {
+    void testCheckEmailReturnsCorrectEmail() {
         assertEquals("farah.ali@bookzone.com", librarian2.getEmail());
     }
 
     @Test
-    void test_checkEmail_doesNotReturnIncorrectEmail() {
+    void testCheckEmailDoesNotReturnIncorrectEmail() {
         assertNotEquals(librarian1.getEmail(), librarian2.getEmail());
     }
 
     @Test
-    void test_checkEmail_doesNotReturnNullForExistingLibrarian() {
+    void testCheckEmailDoesNotReturnNullForExistingLibrarian() {
         assertNotEquals(null, librarian2.getEmail());
     }
 
     @Test
-    void test_checkPassword_returnsCorrectPassword() {
+    void testCheckPasswordReturnsCorrectPassword() {
         assertEquals("Lf21SafS@", librarian1.getPassword());
     }
 
     @Test
-    void test_checkPassword_doesNotReturnIncorrectEmail() {
+    void testCheckPasswordDoesNotReturnIncorrectEmail() {
         assertNotEquals(librarian1.getPassword(), librarian2.getPassword());
     }
 
     @Test
-    void test_checkPassword_doesNotReturnNullForExistingLibrarian() {
+    void testCheckPasswordDoesNotReturnNullForExistingLibrarian() {
         assertNotEquals(null, librarian1.getPassword());
     }
 
