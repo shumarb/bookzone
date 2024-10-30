@@ -21,3 +21,6 @@ __MACOSX
 *.jpeg
 *.png
 *.jpg
+
+# Target ###
+/target/
