@@ -1,9 +1,7 @@
 com/bookzone/model/Book.class
 com/bookzone/BookzoneApplication.class
 com/bookzone/model/Librarian.class
-com/bookzone/repository/SpecialBookRepository.class
 com/bookzone/exceptions/InvalidUsernameException.class
-com/bookzone/service/SpecialBookService.class
 com/bookzone/controller/ErrorPageController.class
 com/bookzone/exceptions/UnavailableUsernameException.class
 com/bookzone/exceptions/InvalidEmailAddressException.class
@@ -19,9 +17,6 @@ com/bookzone/repository/PersonRepository.class
 com/bookzone/model/Person.class
 com/bookzone/controller/LoginController.class
 com/bookzone/service/BookService.class
-com/bookzone/model/SpecialBook.class
 com/bookzone/controller/HomeController.class
 com/bookzone/exceptions/UnavailableEmailAddressException.class
-com/bookzone/exceptions/UnavailablePasswordException.class
 com/bookzone/repository/BookRepository.class
-com/bookzone/controller/SpecialBookController.class

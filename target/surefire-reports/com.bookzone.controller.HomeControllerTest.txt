@@ -1,25 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.bookzone.controller.HomeControllerTest
 -------------------------------------------------------------------------------
-Tests run: 2, Failures: 1, Errors: 1, Skipped: 0, Time elapsed: 0.246 s <<< FAILURE! -- in com.bookzone.controller.HomeControllerTest
-com.bookzone.controller.HomeControllerTest.test_showHome -- Time elapsed: 0.232 s <<< ERROR!
-java.lang.NullPointerException: Cannot invoke "com.bookzone.model.Person.toString()" because "loggedInPerson" is null
-	at com.bookzone.controller.HomeController.showHome(HomeController.java:33)
-	at com.bookzone.controller.HomeControllerTest.test_showHome(HomeControllerTest.java:58)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-
-com.bookzone.controller.HomeControllerTest.test_goToRegistration -- Time elapsed: 0.007 s <<< FAILURE!
-org.opentest4j.AssertionFailedError: expected: <registration> but was: <null>
-	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
-	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
-	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
-	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
-	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)
-	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1145)
-	at com.bookzone.controller.HomeControllerTest.test_goToRegistration(HomeControllerTest.java:65)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.061 s -- in com.bookzone.controller.HomeControllerTest
