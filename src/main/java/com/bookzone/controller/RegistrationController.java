@@ -52,7 +52,7 @@ public class RegistrationController {
      */
     @GetMapping("/registration")
     public String showRegistration() {
-        logger.info("Currently at Registration page");
+        logger.info("Currently at Registration page.");
         return "registration";
     }
 
