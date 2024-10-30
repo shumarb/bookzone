@@ -22,14 +22,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
 @Controller
 public class RegistrationController {
 
     /**
      * Logger used for logging messages of the LibrarianController
      */
-    private static final Logger logger = LogManager.getLogger(HomeController.class);
+    private static final Logger logger = LogManager.getLogger(RegistrationController.class);
 
     /**
      * Service to handle registration operations for {@link Person} entities.
