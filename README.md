@@ -21,7 +21,7 @@ The application features `adding`, `editing`, and `deleting` a book.
 - Java 17.
 - Git.
 - IntelliJ IDEA.
-- MySQL, and MySQL Workbench.
+- MySQL, MySQL Workbench.
 
 ## Setup
 1. `Clone` this repository.
