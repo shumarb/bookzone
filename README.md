@@ -5,6 +5,19 @@ end with `@sgbookcollectors.com`), implemented using the MVC (Model-View-Control
 
 The application features `adding`, `editing`, and `deleting` a book.
 
+## Tech Stack
+- Programming: Java.
+- Frameworks/Tools:
+   - Spring Boot.
+   - Spring Data JPA.
+   - Lombok.
+   - MySQL.
+   - Thymeleaf.
+   - Mockito.
+   - JUnit.
+   - Git.
+   - HTML/CSS.
+  
 ## Prerequisites
 - Java 17.
 - Git.
@@ -34,13 +47,4 @@ The application features `adding`, `editing`, and `deleting` a book.
     - Drop all tables in the schema.
     - Close and reopen IntelliJ IDEA.
 7. Enter `localhost:9001/` in your browser after seeing the message `Started BookzoneApplication` in the `console`.
-8. Explore the application.
-9. Explore data in theMySQL Workbench:
-   - Expand the schema to view `Books (denoted as catalogue)`, `Librarians (denoted as librarians)`, and `Persons (denoted as persons)` tables.
-   - `Catalogue` table: Contains `id`, `author`, `category`, `title`, `year`.
-   - `Person` table: Contains `id`, `name`, `email`, and `password`.
-   - `Library` table: Contains `id`.
-
-## Tech Stack
-- Programming: Java.
-- Frameworks/Tools: Spring Boot, JUnit, Mockito, Bootstrap, Git, HTML, MySQL.
+8. Explore the application and examine data in the MySQL Workbench.
