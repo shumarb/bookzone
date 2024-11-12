@@ -11,6 +11,7 @@
 #.settings
 #.metadata
 #target
+#.idea
 
 # Mac Specific ###
 .DS_Store
