@@ -15,7 +15,7 @@ The application features `adding`, `editing`, and `deleting` a book.
     - MySQL.
     - JUnit, Mockito.
     - Git.
-    - HTML/CSS.
+    - HTML, CSS.
   
 ## Prerequisites
 - Java 17.
