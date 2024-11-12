@@ -6,17 +6,16 @@ end with `@sgbookcollectors.com`), implemented using the MVC (Model-View-Control
 The application features `adding`, `editing`, and `deleting` a book.
 
 ## Tech Stack
-- Programming: Java.
+- Programming:
+    - Java.
 - Frameworks & Tools:
-   - Spring Boot.
-   - Spring Data JPA.
-   - Lombok.
-   - MySQL.
-   - Thymeleaf.
-   - Mockito.
-   - JUnit.
-   - Git.
-   - HTML/CSS.
+    - Spring Boot.
+    - Thymeleaf.
+    - Lombok.
+    - MySQL.
+    - JUnit, Mockito.
+    - Git.
+    - HTML/CSS.
   
 ## Prerequisites
 - Java 17.
