@@ -7,7 +7,7 @@ The application features `adding`, `editing`, and `deleting` a book.
 
 ## Tech Stack
 - Programming: Java.
-- Frameworks/Tools:
+- Frameworks & Tools:
    - Spring Boot.
    - Spring Data JPA.
    - Lombok.
