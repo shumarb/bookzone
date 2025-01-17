@@ -37,7 +37,7 @@ The application features `adding`, `editing`, and `deleting` a book.
 1. Open the `terminal` of your local machine.
 2. Navigate to the location of the cloned repository.
 3. Run `git pull origin main` to ensure you have the latest version of the repository.
-4. Right-click the `BookzoneApplication` class file (Location: `src/main/java/com/example/WorkPortal/BookzoneApplication.java`).
+4. Right-click the `BookzoneApplication` class file (Location: `src/main/java/com/bookzone/BookzoneApplication.java`).
 5. Select `Run 'BookzoneApplic....main()`.
 6. If there are issues with running the application, perform the following before repeating Step 1:
     - Click the `Maven icon` on the right.
